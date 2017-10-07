@@ -13,7 +13,7 @@ Jhordy Esteban Salinas Santiago
 Carlos Andrés Sánchez Venegas
 
 #### Enlace aplicacion de heroku:
-https://dashboard.heroku.com/apps/territory-war
+https://territory-war.herokuapp.com/
 #### Status badge de Circle.ci:
 [![CircleCI](https://circleci.com/gh/TerritoryWar/TerritoryWar.svg?style=svg)](https://circleci.com/gh/TerritoryWar/TerritoryWar)
 #### Status badge de Codacy:
