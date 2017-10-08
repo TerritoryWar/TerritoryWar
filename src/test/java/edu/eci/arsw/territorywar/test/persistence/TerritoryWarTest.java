@@ -22,7 +22,7 @@ public class TerritoryWarTest {
     @Test
     public void deberiaRegistrarJugador() throws TerritoryWarException{
         TerritoryWar tw = new TerritoryWar();
-        Jugador jugador= new Jugador("Casvad","123456", "Carlos", "carlos.sanchez-v@mail.escuelaing.edu.co");
+        Jugador jugador= new Jugador("CMS","123456", "Carlos", "carlos.sanchez-v@mail.escuelaing.edu.co");
         tw.registrarJugador(jugador);
         //no deberia dejarlo agregar dos veces
         try{
@@ -36,10 +36,10 @@ public class TerritoryWarTest {
     @Test
     public void deberiaValidarCredencialesCorrectamente() throws TerritoryWarException{
         TerritoryWar tw = new TerritoryWar();
-        Jugador jugador= new Jugador("Casvad","123456", "Carlos", "carlos.sanchez-v@mail.escuelaing.edu.co");
+        Jugador jugador= new Jugador("CMS","123456", "Carlos", "carlos.sanchez-v@mail.escuelaing.edu.co");
         tw.registrarJugador(jugador);
         try{
-            Jugador ans=tw.validarCredenciales("Casvad","123456");
+            Jugador ans=tw.validarCredenciales("CMS","123456");
             assertTrue(true);
         }catch(TerritoryWarException e){
             fail();
@@ -51,10 +51,10 @@ public class TerritoryWarTest {
     @Test
     public void NodeberiaValidarCredenciales() throws TerritoryWarException{
         TerritoryWar tw = new TerritoryWar();
-        Jugador jugador= new Jugador("Casvad","123456", "Carlos", "carlos.sanchez-v@mail.escuelaing.edu.co");
+        Jugador jugador= new Jugador("CMS","123456", "Carlos", "carlos.sanchez-v@mail.escuelaing.edu.co");
         tw.registrarJugador(jugador);
         try{
-            Jugador ans=tw.validarCredenciales("Casvad","123457");
+            Jugador ans=tw.validarCredenciales("CMS","123457");
             fail();
         }catch(TerritoryWarException e){
             assertTrue(true);
