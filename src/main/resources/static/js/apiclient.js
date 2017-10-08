@@ -37,7 +37,7 @@ apiclient = (function () {
             usuario = jugador1.usuario;
             contrasena = jugador1.contrasena;
             jugador = jugador1;
-            postPromise().then(getPromise()).then(callback);
+            postPromise().then(getPromise).then(callback);
         }
     };
 })();

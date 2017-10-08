@@ -65,7 +65,7 @@ public class Jugador {
      * @param contrasena the contrasena to set
      */
     public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+        this.contrasena = DigestUtils.md5DigestAsHex(contrasena.getBytes()).toUpperCase();
     }
 
     /**
