@@ -8,6 +8,7 @@
 apiclient = (function () {
     var usuario;
     var contrasena;
+    var jugador;
     
     
     var getPromise = function () {
@@ -18,21 +19,25 @@ apiclient = (function () {
 
     var postPromise = function () {
         var r = $.ajax({
-            url: "blueprints/",
+            url: "territorywars/personas",
             type: 'POST',
-            data: JSON.stringify(bp),
+            data: JSON.stringify(jugador),
             contentType: "application/json"
         });
         return r;
     };
 
-    
-    
     return {
         getJugadorValidado:function (username,password,callback){
             usuario = username;
             contrasena = password;
             getPromise().then(callback);
+        },
+        addJugador: function (jugador1,callback){
+            usuario = jugador1.usuario;
+            contrasena = jugador1.contrasena;
+            jugador = jugador1;
+            postPromise().then(getPromise()).then(callback);
         }
     };
 })();

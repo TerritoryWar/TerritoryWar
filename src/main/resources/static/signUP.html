@@ -12,10 +12,52 @@ and open the template in the editor.
         <script src="/webjars/jquery/jquery.min.js"></script>
         <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="js/app.js"></script>
+        <script src="js/usuario.js"></script>
+        <script src="js/apiclient.js"></script>
         <link rel="stylesheet"
-        href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+              href="/css/backGroundImage.css" />
+        <link rel="stylesheet"
+              href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
     </head>
     <body>
-        
+        <div class="container">
+            <div class="row vertical-offset-100">
+                <div class="col-md-3 col-md-offset-100"></div>
+                <div class="col-md-5 col-md-offset-100" style="margin-top:5%">
+                    <div class="panel panel-default" id="forma">
+                        <div class="panel-heading">                                
+                            <div class="row-fluid user-row">
+                                <img src="images/titulo.png" class="img-responsive" alt="Conxole Admin"/>
+                            </div>
+                        </div>
+                        
+                        <div class="panel-body" >
+                            
+                            <div class="col-md-6">
+                                <input class="form-control" placeholder="Username" id="username" type="text">
+                                <br/>
+                                <input class="form-control" placeholder="Password" id="password" type="password">
+                                <br/>   
+                                <input class="form-control" placeholder="Confirm Password" id="cpassword" type="password">
+                                <br/>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <br/>
+                                <input class="form-control" placeholder="Name" id="name" type="text">
+                                <br/>
+                                <input class="form-control" placeholder="Email" id="email" type="email">
+                                <br/>
+                                
+                            </div>
+                            <button class="btn btn-lg btn-info btn-block" id="signup"  onclick="ModuloUsuario.registrarJugador()">
+                                Sign Up
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-md-offset-100"></div>
+            </div>
+        </div>
     </body>
 </html>

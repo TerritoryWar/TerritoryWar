@@ -79,12 +79,11 @@ public class TerritoryWar {
      */
     public void registrarJugador(Jugador jugador) throws TerritoryWarException{
         if(jugadores.get(jugador.getUsuario())!=null){
-            throw new TerritoryWarException("El usuario ya esta registrado en la base de datos");
+            throw new TerritoryWarException(TerritoryWarException.USUARIO_YA_EXISTE);
         }
         else{
             jugadores.put(jugador.getUsuario(), jugador);
         }
-        
     }
     
     

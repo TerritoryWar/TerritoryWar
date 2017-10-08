@@ -17,7 +17,14 @@ var ModuloUsuario = (function(){
             });
         },
         registrarJugador:function (){
-            
+            var usuario = $("#username").val();
+            var jugadorJSON = {"usuario": usuario,"contrasena":$("#password").val(),"nombre":$("#name").val(),"correo":$("#email").val()};
+                apiclient.addJugador(jugadorJSON, function(data){
+                alert(JSON.stringify(data));
+                localStorage.setItem("usuario", JSON.stringify(data));
+                localStorage.setItem("inicioSesion", JSON.stringify(true));
+                window.location.href = "/index.html";
+            });
         }
     };
 })();

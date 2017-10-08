@@ -8,7 +8,6 @@ package edu.eci.arsw.territorywar.test.persistence;
 import edu.eci.arsw.territorywar.exceptions.TerritoryWarException;
 import edu.eci.arsw.territorywar.model.Jugador;
 import edu.eci.arsw.territorywar.services.TerritoryWar;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import org.junit.Test;

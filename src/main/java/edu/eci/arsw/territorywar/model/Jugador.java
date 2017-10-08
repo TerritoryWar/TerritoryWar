@@ -23,9 +23,8 @@ public class Jugador {
         this.nombre = nombre;
         this.correo = correo;
     }
-    
-    public boolean validarCredenciales(Jugador jugador) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    public Jugador() {
     }
     
     /**
@@ -101,5 +100,11 @@ public class Jugador {
         return contrasena.equals(DigestUtils.md5DigestAsHex(password.getBytes()).toUpperCase());
     }
 
+    @Override
+    public String toString() {
+        return "Jugador{" + "usuario=" + usuario + ", contrasena=" + contrasena + ", nombre=" + nombre + ", correo=" + correo + '}';
+    }
+    
     
 }
+    
