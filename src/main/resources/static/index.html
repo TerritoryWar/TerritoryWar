@@ -13,9 +13,46 @@ and open the template in the editor.
         <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="js/app.js"></script>
         <link rel="stylesheet"
-        href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+              href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <link rel="stylesheet"
+              href="/css/navBar.css" />
     </head>
-    <body>
-        <h1>TERRITORY WAR!!!</h1>
+    <body onload="Module.cargarUsuario()">
+
+
+
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <a class="navbar-brand">
+                    <button id="botonJugar" class="btn btn-danger navbar-btn" style="visibility: hidden">Jugar</button>
+                </a>
+                <div class="navbar-collapse collapse">
+                    <div class="nav navbar-nav navbar-left">
+                        <img src="images/tituloHorizontal.png" height="50" width="300">
+                    </div>
+                
+                    
+                    <ul id="barDerecha" class="nav navbar-nav navbar-right">
+                        <li><a href="/signIn.html" onclick=""><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        <li><a href="/signUp.html" onclick=""><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="row vertical-offset-100">
+                <div class="col-md-2 col-md-offset-100"></div>
+                <div class="col-md-8 col-md-offset-100" style="margin-top:10%">
+                    <div class="container" id="usuarioLogeadoConteiner" style="display: none">
+                        
+                    </div>
+                </div>
+                <div class="col-md-2 col-md-offset-100">
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>

@@ -5,22 +5,31 @@
  */
 package edu.eci.arsw.territorywar.services;
 
+import edu.eci.arsw.territorywar.exceptions.TerritoryWarException;
 import edu.eci.arsw.territorywar.model.Jugador;
 import edu.eci.arsw.territorywar.model.Nave;
 import edu.eci.arsw.territorywar.model.Partida;
-import edu.eci.arsw.territorywar.model.Persona;
 import edu.eci.arsw.territorywar.model.Posicion;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author carlo
  */
+@Service
 public class TerritoryWar {
     private Map<String,Partida> partidas = new ConcurrentHashMap<>();
     private Map<String,Jugador> jugadores = new ConcurrentHashMap<>();
+    
+    public TerritoryWar(){
+        
+        jugadores.put("Casvad", new Jugador("Casvad", "123", "Carlos", "Casvad@gmail.com"));
+        jugadores.put("Esteban7700", new Jugador("Esteban7700", "123", "Jhordy", "estebansalinas97@gmail.com"));
+                
+    }
     
     /**
      * Crea la partida apartir de los jugadores que se van a enfrentar
@@ -42,16 +51,23 @@ public class TerritoryWar {
     
     /**
      * Valida el acceso del jugador, es decir que el jugador existe y sus credenciales sean validas
-     * @param jugador el jugador al cual se le validara su informacion para permitir el acceso
-     * @return un booleano que corresponde a que el jugador efectivamente existe y sus credenciales son correctas
+     * @param username el nombre de usuario de la cuenta
+     * @param password la contraseña del usaurio sin encriptar
+     * @return un jugador que corresponde al jugador, solo si efectivamente existe y sus credenciales son correctas
+     * @throws edu.eci.arsw.territorywar.exceptions.TerritoryWarException si el jugador no existe o las credenciales son incorrectas
      */
-    public boolean validarCredenciales(Jugador jugador){
-        boolean ans;
+    public Jugador validarCredenciales(String username, String password) throws TerritoryWarException{
+        Jugador ans;
         try{
-            ans = jugadores.get(((Persona)jugador).getUsuario()).equals(jugador);
+            if(jugadores.get(username).validarContraseña(password)){
+                ans=jugadores.get(username);
+            }
+            else{
+                throw new TerritoryWarException(TerritoryWarException.CREDENCIALES_INCORRECTAS);
+            }
         }
         catch(NullPointerException ex){
-            ans = false;
+            throw new TerritoryWarException(TerritoryWarException.JUGADOR_NO_EXISTE);
         }
         return ans;
     }
@@ -59,10 +75,18 @@ public class TerritoryWar {
     /**
      * Registra un nuevo jugador al sistema, es decir crea el perfil de un jugador
      * @param jugador el jugador que se quiere registrar en el sistema
+     * @throws edu.eci.arsw.territorywar.exceptions.TerritoryWarException si el jugador ya existe en la base de datos
      */
-    public void registrarJugador(Jugador jugador){
-    
+    public void registrarJugador(Jugador jugador) throws TerritoryWarException{
+        if(jugadores.get(jugador.getUsuario())!=null){
+            throw new TerritoryWarException("El usuario ya esta registrado en la base de datos");
+        }
+        else{
+            jugadores.put(jugador.getUsuario(), jugador);
+        }
+        
     }
+    
     
     /**
      * Mueve una nave a una nueva posicion deseada 

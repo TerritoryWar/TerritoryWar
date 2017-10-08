@@ -1,0 +1,30 @@
+
+.navbar-brand {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin:0 auto;
+}
+
+#botonJugar {
+    margin-top: -5px;
+    margin-bottom: 0px;
+}
+
+.navbar-inverse {
+    background-color: rgba(53, 53, 50, 0.86);
+    border-color: #080808;
+}
+.navbar {
+    border-radius: 0px;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: rgb(217, 83, 79);
+}
+
+label {
+    margin-top: 13px;
+    color: aliceblue !important;
+}
