@@ -9,10 +9,11 @@ apiclient = (function () {
     var usuario;
     var contrasena;
     var jugador;
+    var funFail;
     
     
     var getPromise = function () {
-        var r = $.get("territorywars/personas/" + usuario +"/"+contrasena);
+        var r = $.get("territorywars/personas/" + usuario +"/"+contrasena).fail(function (){funFail();});
         return r;
 
     };
@@ -28,9 +29,10 @@ apiclient = (function () {
     };
 
     return {
-        getJugadorValidado:function (username,password,callback){
+        getJugadorValidado:function (username,password,callback,fallo){
             usuario = username;
             contrasena = password;
+            funFail=fallo;
             getPromise().then(callback);
         },
         addJugador: function (jugador1,callback){

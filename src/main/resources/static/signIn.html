@@ -19,7 +19,7 @@ and open the template in the editor.
         <link rel="stylesheet"
               href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
     </head>
-    <body>
+    <body id="cuerpo" onLoad="ModuloUsuario.revisarMalasCredenciales()">
         <div class="container">
             <div class="row vertical-offset-100">
                 
@@ -31,8 +31,9 @@ and open the template in the editor.
                             <div class="row-fluid user-row">
                                 <img src="images/titulo.png" class="img-responsive" alt="Conxole Admin"/>
                             </div>
-                        </div>
-                        <div class="panel-body">
+                    </div>
+                        
+                    <div id="divDatos" class="panel-body">
                             <input class="form-control" placeholder="Username" id="username" type="text">
                             <br/>
                             <input class="form-control" placeholder="Password" id="password" type="password">
