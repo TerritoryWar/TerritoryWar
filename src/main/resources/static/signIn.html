@@ -17,6 +17,8 @@ and open the template in the editor.
         <link rel="stylesheet"
               href="/css/backGroundImage.css" />
         <link rel="stylesheet"
+              href="/css/general.css" />
+        <link rel="stylesheet"
               href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
     </head>
     <body>
@@ -28,8 +30,8 @@ and open the template in the editor.
                     
                     <div class="panel panel-default" id="forma">
                         <div class="panel-heading">                                
-                            <div class="row-fluid user-row">
-                                <img src="images/titulo.png" class="img-responsive" alt="Conxole Admin"/>
+                            <div class="row-fluid user-row" id="headTitle">
+                                <img id="titulo" src="images/titulo.png" class="img-responsive" alt="Conxole Admin"/>
                             </div>
                         </div>
                         <div class="panel-body">
@@ -40,6 +42,8 @@ and open the template in the editor.
                             <button class="btn btn-lg btn-success btn-block" id="login"  onclick="ModuloUsuario.validarCredenciales()">
                                 Log In  
                             </button>
+                            <br/>
+                            <label id="cambio"> Aun no tienes una cuenta?, <a href="/signUP.html" onclick="">clic aqui</a></label>
                         </div>
                     </div>
                 </div>
