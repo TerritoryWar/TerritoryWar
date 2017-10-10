@@ -34,6 +34,34 @@ public class Tablero {
     public List<Posicion> validarMovimiento(Jugador jugador,Nave nave){
         return null;
     }
+
+    /**
+     * @return the jugador1
+     */
+    public Jugador getJugador1() {
+        return jugador1;
+    }
+
+    /**
+     * @param jugador1 the jugador1 to set
+     */
+    public void setJugador1(Jugador jugador1) {
+        this.jugador1 = jugador1;
+    }
+
+    /**
+     * @return the jugador2
+     */
+    public Jugador getJugador2() {
+        return jugador2;
+    }
+
+    /**
+     * @param jugador2 the jugador2 to set
+     */
+    public void setJugador2(Jugador jugador2) {
+        this.jugador2 = jugador2;
+    }
     
     
 }

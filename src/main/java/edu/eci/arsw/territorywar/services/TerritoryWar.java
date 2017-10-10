@@ -32,12 +32,11 @@ public class TerritoryWar {
     }
     
     /**
-     * Crea la partida apartir de los jugadores que se van a enfrentar
-     * @param jugador1 uno de los jugadores involucrados en el enfrentamiento
-     * @param jugador2 uno de los jugadores involucrados en el enfrentamiento
+     * Crea la partida apartir de los jugadores que se van a enfrentar con id de la partida el username del jugador que la crea
+     * @param jugador uno de los jugadores involucrados en el enfrentamiento
      */
-    public void crearPartida(Jugador jugador1, Jugador jugador2){
-        
+    public void crearPartida(Jugador jugador){
+        partidas.put(jugador.getUsuario(), new Partida(jugador.getUsuario(),jugador));
     }
     
     /**

@@ -11,18 +11,39 @@ package edu.eci.arsw.territorywar.model;
  */
 public class Partida {
     private Tablero tablero;
+    private String partidaId;
 
+    public Partida(){
+        
+    }
+    
     /**
-     * @return the tablero
+     * Crea una partida con el jugador indicado
+     * @param partidaId el id de la partida
+     * @param jugador1 el jugador 1
      */
-    public Tablero getTablero() {
-        return tablero;
+    public Partida(String partidaId,Jugador jugador1){
+        this.partidaId = partidaId;
+        tablero = new Tablero();
+        tablero.setJugador1(jugador1);
+    }
+    
+    
+    public void setJugador2(Jugador jugador2){
+        tablero.setJugador2(jugador2);
     }
 
     /**
-     * @param tablero the tablero to set
+     * @return the partidaId
      */
-    public void setTablero(Tablero tablero) {
-        this.tablero = tablero;
+    public String getPartidaId() {
+        return partidaId;
+    }
+
+    /**
+     * @param partidaId the partidaId to set
+     */
+    public void setPartidaId(String partidaId) {
+        this.partidaId = partidaId;
     }
 }
