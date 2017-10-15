@@ -10,6 +10,7 @@ apiclient = (function () {
     var contrasena;
     var jugador;
     var funFail;
+    var idPartida;
     
     
     var getPersonasPromise = function () {
@@ -33,6 +34,28 @@ apiclient = (function () {
         return r;
 
     };
+    
+    var postPartidaPromise = function (){
+        var r = $.ajax({
+            url: "territorywars/partidas",
+            type: 'POST',
+            data: JSON.stringify(jugador),
+            contentType: "application/json"
+        });
+        return r;
+    };
+    
+    var putPartidaPromise = function (){
+        var r = $.ajax({
+            url: "territorywars/partidas/"+idPartida,
+            type: 'PUT',
+            data: JSON.stringify(jugador),
+            contentType: "application/json"
+        });
+        return r;
+    };
+    
+
 
     return {
         getJugadorValidado:function (username,password,callback,fallo){
@@ -49,6 +72,20 @@ apiclient = (function () {
         },
         getPartidasDisponibles: function (callback){
             getPartidasDisponiblesPromise().then(callback);
+        },
+        createPartida:function (jugador1,callback){
+            usuario = jugador1.usuario;
+            contrasena = jugador1.contrasena;
+            jugador = jugador1;
+            postPartidaPromise().then(callback);
+        },
+        unirseAPartida:function (jugador1,idPartida1){
+            usuario = jugador1.usuario;
+            idPartida=idPartida1;
+            contrasena = jugador1.contrasena;
+            jugador = jugador1;
+            return putPartidaPromise();
+            
         }
     };
 })();

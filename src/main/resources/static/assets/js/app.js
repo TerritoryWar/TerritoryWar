@@ -1,21 +1,25 @@
-/* 
+/*  
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 var Module = (function () {
-    var usuario=null;
+    var usuario=null; //el objeto usuario
     var stompClient = null;
     
-    var UnirseOCrearPartida = function (id) {
+    
+    var unirseOCrearPartida = function (partidaID) {
         conectarseAMom();
         //subscribe to /topic/TOPICXX when connections succeed
-        stompClient.connect({}, function (frame) {
-            stompClient.subscribe('/topic/partidas.' + id, function (eventbody) {
-                var partida = JSON.parse(eventbody.body);
-                alert("Jugador1 es: "+partida.jugador1.usuario+ " y Jugador2 es: "+partida.jugador2.usuario);
-            });
-        });
+        return new Promise((resolve, reject) => {
+                stompClient.connect({}, function (frame) {
+                    stompClient.subscribe('/topic/partidas.' + partidaID, function (eventbody) {
+                        var partida = JSON.parse(eventbody.body);
+                        console.log("Jugador1 es: "+partida.jugador1.usuario+ " y Jugador2 es: "+partida.jugador2.usuario);
+                        
+                    });
+                    return resolve();
+                });});    
     };
     
     var desconectar = function () {
@@ -61,13 +65,18 @@ var Module = (function () {
             apiclient.getPartidasDisponibles(function (partidas){
                 if(partidas.length>0){
                     //significa que hay una partida disponible y me uno a esa
+                    unirseOCrearPartida(partidas[0].partidaId).then(function(){
+                        apiclient.unirseAPartida(usuario,partidas[0].partidaId);
+                    });//Me uno primero para escuchar la conexion
                     
-                    stompClient.send("/app/joinGame." + partidas[0].partidaId, {}, JSON.stringify(usuario));
-                    UnirseOCrearPartida(partidas[0].partidaId);
+                    
                     
                 }
                 else{
                     //no hay partidas disponibles, entonces yo creo mi partida
+                    apiclient.createPartida(usuario,function (){
+                        unirseOCrearPartida(usuario.usuario);
+                    });
                 }
             });
         }

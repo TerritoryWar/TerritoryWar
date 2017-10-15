@@ -50,8 +50,24 @@ public class TerritoryWarAPIController {
     
     @RequestMapping(path = "/partidas",method = RequestMethod.GET)
     public ResponseEntity<?> partidasDisponibles(){
-        return new ResponseEntity<>(tw.getPartidasDisponibles(),HttpStatus.ACCEPTED);
-        
+        return new ResponseEntity<>(tw.getPartidasDisponibles(),HttpStatus.ACCEPTED);        
+    }
+    
+    @RequestMapping(path = "/partidas",method = RequestMethod.POST)
+    public ResponseEntity<?> newPartida(@RequestBody Jugador p){
+        tw.crearPartida(p);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+    
+    @RequestMapping(path = "/partidas/{id}",method = RequestMethod.PUT)
+    public ResponseEntity<?> partidaConJugador2(@PathVariable String id,@RequestBody Jugador p){
+        try{
+            System.out.println("Uniendose a la partida: "+p+" con id:"+id);
+            tw.unirAPartida(id,p);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }catch(TerritoryWarException e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
         
     }
 }
