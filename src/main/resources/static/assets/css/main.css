@@ -1743,6 +1743,7 @@
 	input[type="password"],
 	input[type="email"],
 	select {
+                color:black;
 		height: 2.75em;
 	}
 
@@ -1823,7 +1824,7 @@
 	}
 
 	::-webkit-input-placeholder {
-		color: rgba(255, 255, 255, 0.5) !important;
+		color: rgba(153, 166, 196, 1) !important;
 		opacity: 1.0;
 	}
 

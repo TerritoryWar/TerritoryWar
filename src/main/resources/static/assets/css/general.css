@@ -6,3 +6,13 @@
 #cambio{
     font-family: serif;
 }
+a:focus, a:hover {
+    color: #23527c;
+    text-decoration:none !important;
+}
+
+.alert-danger {
+    color: #a94442 !important;
+    background-color: #d44646 !important;
+    border-color: #f1a7b3 !important;
+}

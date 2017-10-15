@@ -22,7 +22,7 @@ and open the template in the editor.
               href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
         <link rel="stylesheet" href="assets/css/main.css" />
     </head>
-    <body id="cuerpo" class="landing" onLoad="ModuloUsuario.revisarMalasCredenciales()">
+    <body id="cuerpo" onLoad="ModuloUsuario.revisarMalasCredenciales()">
         
         <div id="page-wrapper">
             <!-- Header -->
@@ -35,8 +35,8 @@ and open the template in the editor.
                             <div id="menu">
                                 <ul>
                                     <li><a href="index.html">Home</a></li>
-                                    <li><a href="signUp.html">Sign Up</a></li>
                                     <li><a href="signIn.html">Log In</a></li>
+                                    <li><a href="signUp.html">Sign Up</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -67,12 +67,22 @@ and open the template in the editor.
                                 Log In  
                             </button>
                             <br/>
-                            <label id="cambio"> Aun no tienes una cuenta?, <a href="/signUp.html" onclick="">clic aqui</a></label>
+                            <!-- LABEL
+                                <label id="cambio"> Aun no tienes una cuenta?, <a href="/signUp.html" onclick="">clic aqui</a></label>-->
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 col-md-offset-100"></div>
             </div>
         </div>
+        
+        <!-- Scripts -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/jquery.scrollex.min.js"></script>
+        <script src="assets/js/jquery.scrolly.min.js"></script>
+        <script src="assets/js/skel.min.js"></script>
+        <script src="assets/js/util.js"></script>
+        <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+        <script src="assets/js/main.js"></script>
     </body>
 </html>

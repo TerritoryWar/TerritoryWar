@@ -1,21 +1,21 @@
 body {
   /* Ubicación de la imagen */
-  background-image: URL('/images/signUP.png');
+  background-image: URL('/images/signUP.png') !important;
   /* Nos aseguramos que la imagen de fondo este centrada vertical y
     horizontalmente en todo momento */
-  background-position: center center;
+  background-position: center center !important;
   /* La imagen de fondo no se repite */
-  background-repeat: no-repeat;
+  background-repeat: no-repeat !important;
   /* La imagen de fondo está fija en el viewport, de modo que no se mueva cuando
      la altura del contenido supere la altura de la imagen. */
-  background-attachment: fixed;
+  background-attachment: fixed !important;
   /* La imagen de fondo se reescala cuando se cambia el ancho de ventana
      del navegador */
-  background-size: cover;
+  background-size: cover !important;
 }
 #forma{
-    border-color: #a94442;
-    border-radius: 10%;
-    border: red 2px solid;
-    text-align: center;
+    border-color: #a94442 !important;
+    border-radius: 10% !important;
+    border: red 2px solid !important;
+    text-align: center !important;
 }

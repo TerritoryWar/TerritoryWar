@@ -7,7 +7,6 @@ var ModuloUsuario = (function(){
     
     /**
      * Funcion que captura las variables pasados por GET
-     * http://www.lawebdelprogramador.com/pagina.html?id=10&pos=3
      * Devuelve un array de clave=>valor
      */
     var getParametros = function()

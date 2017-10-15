@@ -12,8 +12,9 @@ var Module = (function () {
                 usuario=JSON.parse(localStorage.getItem('usuario'));
                 $("#usuarioLogeadoConteiner").css('display','inherit');
                 $("#botonJugar").css('visibility','visible');
-                $("#barDerecha").replaceWith("<ul id='barDerecha' class='nav navbar-nav navbar-right'>\n\
-                                              <li><a href='#' onclick='Module.logOut()'><span class='glyphicon glyphicon-log-out'></span> Logout</a></li>\n\
+                $("#menuUl").replaceWith("<ul id='menuUl'>\n\
+                                            <li><a href='index.html'>Home</a></li>\n\
+                                            <li><a href='#' onclick='Module.logOut()'><span class='glyphicon glyphicon-log-out'></span> Logout</a></li>\n\
                                                </ul><div class='nav navbar-nav navbar-right'><label id='labelJugador' >Bienvenido "+usuario.usuario+ "</label></div>");
                 
             }
