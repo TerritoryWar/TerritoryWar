@@ -12,13 +12,13 @@ apiclient = (function () {
     var funFail;
     
     
-    var getPromise = function () {
+    var getPersonasPromise = function () {
         var r = $.get("territorywars/personas/" + usuario +"/"+contrasena).fail(function (){funFail();});
         return r;
 
     };
 
-    var postPromise = function () {
+    var postPersonasPromise = function () {
         var r = $.ajax({
             url: "territorywars/personas",
             type: 'POST',
@@ -27,19 +27,28 @@ apiclient = (function () {
         });
         return r;
     };
+    
+    var getPartidasDisponiblesPromise = function () {
+        var r = $.get("territorywars/partidas");
+        return r;
+
+    };
 
     return {
         getJugadorValidado:function (username,password,callback,fallo){
             usuario = username;
             contrasena = password;
             funFail=fallo;
-            getPromise().then(callback);
+            getPersonasPromise().then(callback);
         },
         addJugador: function (jugador1,callback){
             usuario = jugador1.usuario;
             contrasena = jugador1.contrasena;
             jugador = jugador1;
-            postPromise().then(getPromise).then(callback);
+            postPersonasPromise().then(getPersonasPromise).then(callback);
+        },
+        getPartidasDisponibles: function (callback){
+            getPartidasDisponiblesPromise().then(callback);
         }
     };
 })();

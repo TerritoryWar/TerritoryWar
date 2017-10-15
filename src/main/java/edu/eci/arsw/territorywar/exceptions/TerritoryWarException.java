@@ -14,6 +14,7 @@ public class TerritoryWarException extends Exception{
     public static String JUGADOR_NO_EXISTE = "El usuario que intenta acceder no existe";
     public static String CREDENCIALES_INCORRECTAS = "las credenciales son incorrectas";
     public static String USUARIO_YA_EXISTE = "El usuario ya esta registrado en la base de datos";
+    public static String PARTIDA_COMPLETA = "la partida ya contiene dos jugadores";
     
     public TerritoryWarException(String message) {
         super(message);

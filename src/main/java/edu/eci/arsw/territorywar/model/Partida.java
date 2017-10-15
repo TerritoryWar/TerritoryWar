@@ -5,6 +5,8 @@
  */
 package edu.eci.arsw.territorywar.model;
 
+import edu.eci.arsw.territorywar.exceptions.TerritoryWarException;
+
 /**
  *
  * @author carlo
@@ -29,9 +31,21 @@ public class Partida {
     }
     
     
-    public void setJugador2(Jugador jugador2){
+    public synchronized void setJugador2(Jugador jugador2) throws TerritoryWarException{
+        if(tablero.getJugador2()!=null){
+            throw new TerritoryWarException(TerritoryWarException.PARTIDA_COMPLETA);
+        }
         tablero.setJugador2(jugador2);
     }
+    
+    public Jugador getJugador1(){
+        return tablero.getJugador1();
+    }
+    
+    public Jugador getJugador2(){
+        return tablero.getJugador2();
+    }
+    
 
     /**
      * @return the partidaId

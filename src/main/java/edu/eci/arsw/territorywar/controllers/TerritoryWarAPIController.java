@@ -47,4 +47,11 @@ public class TerritoryWarAPIController {
             return new ResponseEntity<>(ex.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
+    
+    @RequestMapping(path = "/partidas",method = RequestMethod.GET)
+    public ResponseEntity<?> partidasDisponibles(){
+        return new ResponseEntity<>(tw.getPartidasDisponibles(),HttpStatus.ACCEPTED);
+        
+        
+    }
 }
