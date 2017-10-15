@@ -10,7 +10,6 @@ var Module = (function () {
         cargarUsuario:function (){
             if(localStorage.getItem("inicioSesion")){
                 usuario=JSON.parse(localStorage.getItem('usuario'));
-                $("#usuarioLogeadoConteiner").css('display','inherit');
                 $("#botonJugar").css('visibility','visible');
                 $("#menuUl").replaceWith("<ul id='menuUl'>\n\
                                             <li><a href='index.html'>Home</a></li>\n\
@@ -25,6 +24,9 @@ var Module = (function () {
             location.reload(true);
             $("#botonJugar").css('visibility','hidden');
             
+        },
+        buscarPartida:function (){
+            $("#panelJuego").css('display','inherit');
         }
         
     };
