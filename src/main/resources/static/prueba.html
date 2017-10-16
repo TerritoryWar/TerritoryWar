@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Territory war</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+        <link rel="stylesheet" href="assets/css/main.css" />
+        <script src="/webjars/jquery/jquery.min.js"></script>
+        <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="assets/js/app.js"></script>
+        <script src="assets/js/juego.js"></script>
+        <script src="assets/js/apiclient.js"></script>
+        <!-- MOM-->
+        <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+        <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    </head>
+    <body>
+        <!-- Page Wrapper -->
+        <div id="page-wrapper">
+
+            <section id="boton">
+                <div class="inner">
+                    <ul class="actions" id="botonJugar" >
+                        <li><a href="#panelJuego" onclick="Juego.generarTablero()" class="button special scrolly">Jugar</a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="panelJuego" class="wrapper style1 special" style="display: none">
+                <div class="inner">
+                    <img src="images/loading2.gif" alt="Cargando" style="width:40%;height:40%;"/>
+                    <img src="images/loading.gif" alt="Cargando" style="width:40%;height:40%;"/>
+                </div>
+            </section>
+        </div>
+
+
+
+        <!-- Scripts -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/jquery.scrollex.min.js"></script>
+        <script src="assets/js/jquery.scrolly.min.js"></script>
+        <script src="assets/js/skel.min.js"></script>
+        <script src="assets/js/util.js"></script>
+        <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+        <script src="assets/js/main.js"></script>    
+    </body>
+</html>
