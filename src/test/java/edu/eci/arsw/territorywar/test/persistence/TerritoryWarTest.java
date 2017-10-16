@@ -35,7 +35,7 @@ public class TerritoryWarTest {
     @Test
     public void deberiaValidarCredencialesCorrectamente() throws TerritoryWarException{
         TerritoryWar tw = new TerritoryWar();
-        Jugador jugador= new Jugador("CMS","123456", "Carlos", "carlos.sanchez-v@mail.escuelaing.edu.co");
+        Jugador jugador= new Jugador("CMS3","123456", "Carlos", "carlos.sanchez-v@mail.escuelaing.edu.co");
         tw.registrarJugador(jugador);
         try{
             Jugador ans=tw.validarCredenciales("CMS","123456");
@@ -50,7 +50,7 @@ public class TerritoryWarTest {
     @Test
     public void NodeberiaValidarCredenciales() throws TerritoryWarException{
         TerritoryWar tw = new TerritoryWar();
-        Jugador jugador= new Jugador("CMS","123456", "Carlos", "carlos.sanchez-v@mail.escuelaing.edu.co");
+        Jugador jugador= new Jugador("CMS2","123456", "Carlos", "carlos.sanchez-v@mail.escuelaing.edu.co");
         tw.registrarJugador(jugador);
         try{
             Jugador ans=tw.validarCredenciales("CMS","123457");
