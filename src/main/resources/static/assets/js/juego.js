@@ -33,12 +33,12 @@ var Juego = (function () {
           $("#panelJuego").css('display','inherit');
           $("#panelJuego").html(
                   "<div class='container'>\n\
-                        <div class='row'>\n\
-                            <div class='col-md-3 col-md-offset-100'></div>\n\
-                            <div class='col-md-6'>\n\
+                        <div class='row' style='padding: 0 0 0 15%'>\n\
+                            <div ></div>\n\
+                            <div >\n\
                                 "+genTodasFilas()+"\
                             </div>\n\
-                            <div class='col-md-3 col-md-offset-100'></div>\n\
+                            <div ></div>\n\
                         </div>\n\
                    </div>"
                   );
