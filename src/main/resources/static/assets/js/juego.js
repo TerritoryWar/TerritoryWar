@@ -12,8 +12,10 @@ var Juego = (function () {
     var genFila= function(numFila){
         var ans="";
         for (var i = 0; i < 8; i++) { 
-            ans+="<td >\n\
-                    <button id='"+numFila+"-"+i+"' onclick='Juego.oprimiBoton("+numFila+","+i+")' style='width:100%;height:100%'></button>\n\
+            ans+="<td style='padding:0 0 0 0 !important;'>\n\
+                    <button id='"+numFila+"-"+i+"' onclick='Juego.oprimiBoton("+numFila+","+i+")' style='width:100%;height:100%>\n\
+                        <img src='/images/vacio.png' height='100%' width='100%'/>\n\
+                    </button>\n\
                   </td>";
         }
         return ans;    
