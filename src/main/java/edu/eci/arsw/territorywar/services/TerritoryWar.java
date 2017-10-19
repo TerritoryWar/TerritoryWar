@@ -10,15 +10,11 @@ import edu.eci.arsw.territorywar.model.Jugador;
 import edu.eci.arsw.territorywar.model.Nave;
 import edu.eci.arsw.territorywar.model.Partida;
 import edu.eci.arsw.territorywar.model.Posicion;
-import edu.eci.arsw.territorywar.mom.STOMPMessagesHandler;
-import java.util.HashSet;
+import edu.eci.arsw.territorywar.mom.MessageManagment;
+import edu.eci.arsw.territorywar.persistence.TerritoryWarPersistence;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 /**
@@ -27,15 +23,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TerritoryWar {
-    private static  Map<String,Partida> partidas = new ConcurrentHashMap<>();
-    private static Map<String,Jugador> jugadores = new ConcurrentHashMap<>();
     @Autowired
-    SimpMessagingTemplate msgt;
+    TerritoryWarPersistence twp;
+    @Autowired
+    MessageManagment mm;
     
     public TerritoryWar(){
-        jugadores.put("Casvad", new Jugador("Casvad", "123", "Carlos", "Casvad@gmail.com"));
-        jugadores.put("Esteban7700", new Jugador("Esteban7700", "123", "Jhordy", "estebansalinas97@gmail.com"));
-        //partidas.put("1", new Partida("1", jugadores.get("Esteban7700")));
     }
     
     /**
@@ -44,26 +37,18 @@ public class TerritoryWar {
      * @param jugador2 el jugador a unirse
      * @throws TerritoryWarException si ya esta llena la partida
      */
-    public void unirAPartida(String id, Jugador jugador2) throws TerritoryWarException {
-        partidas.get(id).setJugador2(jugador2);
-        msgt.convertAndSend("/topic/partidas."+id,getPartida(id)); //les reporta a los dos jugadores
+    public void unirAPartida(String id, Jugador jugador2) throws TerritoryWarException{
+        twp.unirAPartida(id,jugador2);
+        mm.reportarAmbosJugadores(twp.getPartida(id));
     }
     
-    /**
-     * Retorna la partida segun el id
-     * @param id el id de la partida
-     * @return la partida con dicho id
-     */
-    public  Partida getPartida(String id){
-        return partidas.get(id);
-    }
+    
     /**
      * Crea la partida apartir de los jugadores que se van a enfrentar con id de la partida el username del jugador que la crea
      * @param jugador uno de los jugadores involucrados en el enfrentamiento
      */
     public  void crearPartida(Jugador jugador){
-        partidas.put(jugador.getUsuario(), new Partida(jugador.getUsuario(),jugador));
-        
+        twp.crearPartida(jugador);
     }
     
     
@@ -72,13 +57,7 @@ public class TerritoryWar {
      * @return 
      */
     public  Set<Partida> getPartidasDisponibles(){
-        Set<Partida> ans = new HashSet<>();
-        for (Partida p : partidas.values()) {
-            if(p.getJugador2()==null){
-                ans.add(p);
-            }
-        }
-        return ans;
+        return twp.getPartidasDisponibles();
     }
     
     /**
@@ -97,20 +76,8 @@ public class TerritoryWar {
      * @return un jugador que corresponde al jugador, solo si efectivamente existe y sus credenciales son correctas
      * @throws edu.eci.arsw.territorywar.exceptions.TerritoryWarException si el jugador no existe o las credenciales son incorrectas
      */
-    public   Jugador validarCredenciales(String username, String password) throws TerritoryWarException{
-        Jugador ans;
-        try{
-            if(jugadores.get(username).validarContraseña(password)){
-                ans=jugadores.get(username);
-            }
-            else{
-                throw new TerritoryWarException(TerritoryWarException.CREDENCIALES_INCORRECTAS);
-            }
-        }
-        catch(NullPointerException ex){
-            throw new TerritoryWarException(TerritoryWarException.JUGADOR_NO_EXISTE);
-        }
-        return ans;
+    public Jugador validarCredenciales(String username, String password) throws TerritoryWarException{
+        return twp.validarCredenciales(username,password);
     }
     
     /**
@@ -119,14 +86,8 @@ public class TerritoryWar {
      * @throws edu.eci.arsw.territorywar.exceptions.TerritoryWarException si el jugador ya existe en la base de datos
      */
     public  void registrarJugador(Jugador jugador) throws TerritoryWarException{
-        if(jugadores.get(jugador.getUsuario())!=null){
-            throw new TerritoryWarException(TerritoryWarException.USUARIO_YA_EXISTE);
-        }
-        else{
-            jugadores.put(jugador.getUsuario(), jugador);
-        }
+        twp.registrarJugador(jugador);
     }
-    
     
     /**
      * Mueve una nave a una nueva posicion deseada 

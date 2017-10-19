@@ -5,20 +5,7 @@
  */
 package edu.eci.arsw.territorywar.mom;
 
-import edu.eci.arsw.territorywar.exceptions.TerritoryWarException;
-import edu.eci.arsw.territorywar.model.Jugador;
-import edu.eci.arsw.territorywar.model.Partida;
-import edu.eci.arsw.territorywar.services.TerritoryWar;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
-import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
@@ -30,9 +17,4 @@ import org.springframework.stereotype.Controller;
 public class STOMPMessagesHandler {
     @Autowired
     SimpMessagingTemplate msgt;
-    
-    
-    
-    
-    
 }
