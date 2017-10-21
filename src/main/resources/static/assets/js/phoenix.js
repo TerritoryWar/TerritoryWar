@@ -64,12 +64,14 @@ class Phoenix{
         $("#"+this.x+"-"+this.y).html("<img src='/images/vacio.png' height='100%' width='100%'/>");
         this.x=x;
         this.y=y;
-        this.ponerImagen();
+        $("#"+this.x+"-"+this.y).html("<img src='/images/PhoenixAliadoTime1.png' height='100%' width='100%'/>");
         this.setPuedeMoverse(false);
         var este=this;
         setTimeout(function(){
             este.setPuedeMoverse(true);
+            este.ponerImagen();
         }, 1000);
+        
     }
     
     /**

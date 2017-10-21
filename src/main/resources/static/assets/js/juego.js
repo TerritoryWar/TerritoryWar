@@ -86,13 +86,21 @@ var Juego = (function () {
       },
       oprimiBoton:function (x,y){
           if(!naveSeleccionada){ //la nave no ha sido seleccionada
-              if(tablero[x][y]!=null && tablero[x][y].getBando()=="aliado"){
+              if(tablero[x][y]!==null && tablero[x][y].getBando()==="aliado"){
                   try{ 
                     posiblesMovimientos=tablero[x][y].getPosiblesMovimientos(tablero);
+                    
                     naveSeleccionada=true;
                     posAnterior=[x,y];
                       for (var i = 0; i < posiblesMovimientos.length; i++) {
-                          $("#"+posiblesMovimientos[i][0]+"-"+posiblesMovimientos[i][1]).html("<img src='/images/posibleMovimiento.png' height='100%' width='100%'/>"); //falta mirar si la pos tiene una nave enemiga
+                          var x1 = posiblesMovimientos[i][0];
+                          var y1 = posiblesMovimientos[i][1];
+                          if (tablero[x1][y1]!== undefined && tablero[x1][y1]!== null && tablero[x1][y1].getBando()==="enemigo"){
+                              $("#"+x1+"-"+y1).html("<img src='/images/PhoenixEnemigoKill.png' height='100%' width='100%'/>");
+                          }else{
+                              $("#"+x1+"-"+y1).html("<img src='/images/posibleMovimiento.png' height='100%' width='100%'/>");
+                          }
+                          
                       }
                   }catch(e){
                       console.log(e);
@@ -103,7 +111,14 @@ var Juego = (function () {
           else{
               if(isArrayInArray(posiblesMovimientos,[x,y])){//que si se puede mover a dicha posicion
                   for (var i = 0; i < posiblesMovimientos.length; i++) {
-                          $("#"+posiblesMovimientos[i][0]+"-"+posiblesMovimientos[i][1]).html("<img src='/images/vacio.png' height='100%' width='100%'/>");//falta mirar si la pos tiene una nave enemiga
+                      var x1 = posiblesMovimientos[i][0];
+                          var y1 = posiblesMovimientos[i][1];
+                          if (tablero[x1][y1]!== undefined && tablero[x1][y1]!== null && tablero[x1][y1].getBando()==="enemigo"){
+                              $("#"+x1+"-"+y1).html("<img src='/images/PhoenixEnemigo.png' height='100%' width='100%'/>");
+                          }else{
+                              $("#"+x1+"-"+y1).html("<img src='/images/vacio.png' height='100%' width='100%'/>");
+                          }
+                      
                       }
                   tablero[posAnterior[0]][posAnterior[1]].moverNave(x,y);
                   tablero[x][y]=tablero[posAnterior[0]][posAnterior[1]];
