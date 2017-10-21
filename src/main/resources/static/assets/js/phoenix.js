@@ -28,7 +28,7 @@ class Phoenix{
     }
     
     /**
-     * cambia la imagen del boton, se usa al crear una nueva nave
+     * cambia la imagen del boton, se usa al crear una nueva nave o cuando se mueve la nave
      */
     ponerImagen(){
         $("#"+this.x+"-"+this.y).html("<img src='"+this.imageSrc+"' height='100%' width='100%'/>");//le pone la imagen del boton
@@ -51,18 +51,24 @@ class Phoenix{
         return this.imageSrc;
     }
     
+    setPuedeMoverse(bool){
+        this.puedeMoverse=bool;
+    }
+    
     /**
      * Cambia la posicion de la nave
      * @param {type} x, eje x
      * @param {type} y, eje y
      */
     moverNave(x,y){
+        $("#"+this.x+"-"+this.y).html("<img src='/images/vacio.png' height='100%' width='100%'/>");
         this.x=x;
         this.y=y;
-        //agrega la imagen de fondo en que le falta 1 segundo para moverse
+        this.ponerImagen();
+        this.setPuedeMoverse(false);
+        var este=this;
         setTimeout(function(){
-            alert("Ya me puedo mover "+x+" "+y); //acá le quita la imagen de fondo
-            this.puedeMoverse=true;
+            este.setPuedeMoverse(true);
         }, 1000);
     }
     
@@ -73,21 +79,24 @@ class Phoenix{
      */
     getPosiblesMovimientos(tablero){
         if(!this.puedeMoverse){
-            throw "No se puede mover";
+            
+            throw "No se puede mover la nave en la posicion "+this.x+" "+this.y;
         }
         var ans=[];
-        if(this.x-1>=0  && (tablero[x-1][y]==null || tablero[x-1][y].getBando=="enemigo")){
-            ans.push((this.x-1,this.y));
+        if(this.x-1>=0  && (tablero[this.x-1][this.y]==null || tablero[this.x-1][this.y].getBando()=="enemigo")){
+            ans.push([this.x-1,this.y]);
         }
-        if(this.x+1<this.tamañoTablero && (tablero[x+1][y]==null || tablero[x+1][y].getBando=="enemigo")){
-            ans.push((this.x+1,this.y));
+        if(this.x+1<this.tamañoTablero && (tablero[this.x+1][this.y]==null || tablero[this.x+1][this.y].getBando()=="enemigo")){
+            ans.push([this.x+1,this.y]);
         }
-        if(this.y-1>=0 && (tablero[x][y-1]==null || tablero[x][y-1].getBando=="enemigo")){
-            ans.push((this.x,this.y-1));
+        if(this.y-1>=0 && (tablero[this.x][this.y-1]==null || tablero[this.x][this.y-1].getBando()=="enemigo")){
+            ans.push([this.x,this.y-1]);
         }
-        if(this.y+1<this.tamañoTablero && (tablero[x][y+1]==null || tablero[x][y+1].getBando=="enemigo")){
-            ans.push((this.x,this.y+1));
+        if(this.y+1<this.tamañoTablero && (tablero[this.x][this.y+1]==null || tablero[this.x][this.y+1].getBando()=="enemigo")){
+            ans.push([this.x,this.y+1]);
         }
+            
+        
         return ans;
     }
     
