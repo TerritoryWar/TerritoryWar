@@ -62,11 +62,10 @@ public class TerritoryWar {
     
     /**
      * Termina la partida apartir de los jugadores que se estaban enfrentando
-     * @param jugador1 uno de los jugadores involucrados en el enfrentamiento
-     * @param jugador2 uno de los jugadores involucrados en el enfrentamiento
+     * @param idPartida, el id de la partida
      */
-    public  void terminarPartida(Jugador jugador1, Jugador jugador2){
-        
+    public  void deletePartida(String idPartida){
+        twp.deletePartida(idPartida);
     }
     
     /**

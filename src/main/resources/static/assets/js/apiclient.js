@@ -49,6 +49,15 @@ apiclient = (function () {
         var r = $.ajax({
             url: "territorywars/partidas/"+idPartida,
             type: 'PUT',
+            contentType: "application/json"
+        });
+        return r;
+    };
+    
+    var deletePartidaPromise = function (){
+        var r = $.ajax({
+            url: "territorywars/partidas/"+idPartida,
+            type: 'DELETE',
             data: JSON.stringify(jugador),
             contentType: "application/json"
         });
@@ -86,6 +95,12 @@ apiclient = (function () {
             jugador = jugador1;
             return putPartidaPromise();
             
+        },
+        salirDelJuego:function (jugador1){
+            usuario = jugador1.usuario;
+            jugador=jugador1;
+            idPartida=jugador1.usuario;
+            deletePartidaPromise();
         }
     };
 })();

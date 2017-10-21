@@ -41,6 +41,12 @@ public interface TerritoryWarPersistence {
     public Set<Partida> getPartidasDisponibles();
     
     /**
+     * elimina la partida, si no hay partidas con ese id, no hace nada
+     * @param idPartida, el id de la partida
+     */
+    public void deletePartida(String idPartida);
+    
+    /**
      * Crea la partida apartir de los jugadores que se van a enfrentar con id de la partida el username del jugador que la crea
      * @param jugador uno de los jugadores involucrados en el enfrentamiento
      */

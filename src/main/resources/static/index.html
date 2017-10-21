@@ -21,7 +21,7 @@
         <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
         <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
     </head>
-    <body class="landing" onload="Module.cargarUsuario()">
+    <body class="landing" onload="Module.cargarUsuario()" onbeforeunload="Module.exitGame()" onunload="Module.exitGame()">
 
         <!-- Page Wrapper -->
         <div id="page-wrapper">

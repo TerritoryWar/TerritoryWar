@@ -140,4 +140,9 @@ public class TerritoryWarPersistenceDataStructures implements TerritoryWarPersis
     public static void setJugadores(Map<String,Jugador> aJugadores) {
         jugadores = aJugadores;
     }
+
+    @Override
+    public void deletePartida(String idPartida) {
+        partidas.remove(idPartida);
+    }
 }

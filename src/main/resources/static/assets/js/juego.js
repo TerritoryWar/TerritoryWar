@@ -16,7 +16,7 @@ var Juego = (function () {
         var ans="";
         for (var i = 0; i < 8; i++) { 
             ans+="<td style='padding:0 0 0 0 !important;'>\n\
-                    <button id='"+numFila+"-"+i+"' onclick='Juego.oprimiBoton("+numFila+","+i+")' style='width:100%;'>\n\
+                    <button id='"+i+"-"+numFila+"' onclick='Juego.oprimiBoton("+i+","+numFila+")' style='width:100%;'>\n\
                         <img src='/images/vacio.png' height='100%' width='100%'/>\n\
                     </button>\n\
                   </td>";
@@ -38,7 +38,7 @@ var Juego = (function () {
         //Por el momento solo phoenix
         for (var i = lenTablero-2; i < lenTablero; i++) {
             for (var j = 0; j < lenTablero; j++) {
-                tablero[i][j]=new Phoenix(i,j,"aliado");
+                tablero[j][i]=new Phoenix(j,i,"aliado");
             }
         }
     };
@@ -47,7 +47,7 @@ var Juego = (function () {
         //Por el momento solo phoenix
         for (var i = 0; i < 2; i++) {
             for (var j = 0; j < lenTablero; j++) {
-                tablero[i][j]=new Phoenix(i,j,"enemigo");
+                tablero[j][i]=new Phoenix(j,i,"enemigo");
             }
         }
     };

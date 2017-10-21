@@ -38,6 +38,10 @@ var Module = (function () {
     };
     
     
+    var salirDelJuego = function (){
+        apiclient.salirDelJuego(usuario);
+    };
+    
     
     
     return{
@@ -56,6 +60,9 @@ var Module = (function () {
         logOut: function (){
             localStorage.removeItem('usuario');
             localStorage.removeItem('inicioSesion');
+            salirDelJuego();
+            usuario=null;
+            stompClient=null;
             location.reload(true);
             $("#botonJugar").css('visibility','hidden');
             
@@ -79,8 +86,15 @@ var Module = (function () {
                     });
                 }
             });
+        },
+        exitGame:function (){
+            salirDelJuego();
+            localStorage.removeItem('usuario');
+            localStorage.removeItem('inicioSesion');
         }
         
     };
 })();
+
+
 
