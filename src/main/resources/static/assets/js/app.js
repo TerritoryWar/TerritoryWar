@@ -8,6 +8,8 @@ var Module = (function () {
     var stompClient = null;
     var idPartida=null;
     var idOponente=null;
+    var numNaves=16;
+    var gameOver = false;
     
     var unirseOCrearPartida = function (partidaID) {
         conectarseAMom();idPartida=partidaID;
@@ -29,6 +31,10 @@ var Module = (function () {
                     stompClient.subscribe('/topic/partidas.' + idPartida + "."+usuario.usuario, function (eventbody) {
                         var coordenadas = JSON.parse(eventbody.body);
                         Juego.moverOponente(coordenadas);
+                        publicarMuerte();
+                    });
+                    stompClient.subscribe('/topic/partidas.'+idPartida+".loser",function(eventbody){
+                        alert("Juego finalizado, ganador: "+JSON.parse(eventbody.body).jugadorGanador);
                     });
                     return resolve();
                 });});    
@@ -38,9 +44,16 @@ var Module = (function () {
         console.info("Publicando la posicion de nave a mi enemigo ");
         //publicar el evento
         stompClient.send("/topic/partidas." + idPartida + "." + idOponente, {}, JSON.stringify({"x":x,"y":y,"xA":xA,"yA":yA}));
+        
     };
     
-    
+    var publicarMuerte = function (){
+        numNaves = Juego.verificarNaves();
+        if (numNaves === 0){
+            stompClient.send("/topic/partidas."+idPartida+".loser",{},JSON.stringify({"jugadorGanador":idOponente}));
+        }
+    };
+
     var desconectar = function () {
             if (stompClient !== null) {
                 stompClient.disconnect();

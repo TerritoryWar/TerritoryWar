@@ -11,6 +11,7 @@ var Juego = (function () {
     var naveSeleccionada = false; //booleano para saber si el jugador tiene una nave seleccionada
     var posiblesMovimientos = [];
     var posAnterior;
+    var finalizado = false;
 
     var genFila = function (numFila) {
         var ans = "";
@@ -62,10 +63,22 @@ var Juego = (function () {
         return contains;
     };
 
+    var contarNaves = function () {
+        var naves = 0;
+        for (var i = 0; i < tablero.length; i++) {
+            for (var j = 0; j < tablero[0].length; j++) {
+                if (tablero[i][j] !== undefined && tablero[i][j] !== null && tablero[i][j].getBando() === "aliado") {
+                    naves += 1;
+                }
+            }
+        }
+        return naves;
+    };
+
 
     return {
         generarTablero: function () {
-            console.log("Generando tablero")
+            console.log("Generando tablero");
             $("#panelJuego").css('display', 'inherit');
             $("#panelJuego").html(
                     "<div class='container'>\n\
@@ -87,10 +100,10 @@ var Juego = (function () {
         },
         oprimiBoton: function (x, y) {
             if (!naveSeleccionada) { //la nave no ha sido seleccionada
-                if (tablero[x][y] !== null && tablero[x][y].getBando() === "aliado") {
+                if (tablero[x][y] !== null && tablero[x][y] !== undefined && tablero[x][y].getBando() === "aliado") {
                     try {
                         posiblesMovimientos = tablero[x][y].getPosiblesMovimientos(tablero);
-                        
+
                         if (posiblesMovimientos.length >= 1) {
                             naveSeleccionada = true;
                             posAnterior = [x, y];
@@ -113,8 +126,8 @@ var Juego = (function () {
             } else {
                 if (isArrayInArray(posiblesMovimientos, [x, y])) {//que si se puede mover a dicha posicion
                     // Avisarle a mi enemigo que me movi
-                    Module.avisarMovimiento(x,7-y,posAnterior[0],7-posAnterior[1]);
-                    
+                    Module.avisarMovimiento(x, 7 - y, posAnterior[0], 7 - posAnterior[1]);
+
                     for (var i = 0; i < posiblesMovimientos.length; i++) {
                         var x1 = posiblesMovimientos[i][0];
                         var y1 = posiblesMovimientos[i][1];
@@ -129,14 +142,20 @@ var Juego = (function () {
                     tablero[x][y] = tablero[posAnterior[0]][posAnterior[1]];
                     tablero[posAnterior[0]][posAnterior[1]] = null;
                     naveSeleccionada = false;
-                    
+
                 }
-            }   
+            }
+
+
         },
         moverOponente: function (coordenadas) {
             tablero[coordenadas.xA][coordenadas.yA].moverNave(coordenadas.x, coordenadas.y);
             tablero[coordenadas.x][coordenadas.y] = tablero[coordenadas.xA][coordenadas.yA];
             tablero[coordenadas.xA][coordenadas.yA] = null;
+        },
+        verificarNaves: function () {
+            var naves = contarNaves();
+            return naves;
         }
     };
 })();
