@@ -88,6 +88,7 @@ var Module = (function () {
         },
         buscarPartida:function (){
             $("#panelJuego").css('display','inherit');
+            $("#botonJugar").css('visibility','hidden');
             apiclient.getPartidasDisponibles(function (partidas){
                 if(partidas.length>0){
                     //significa que hay una partida disponible y me uno a esa
