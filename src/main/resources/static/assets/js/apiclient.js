@@ -49,6 +49,7 @@ apiclient = (function () {
         var r = $.ajax({
             url: "territorywars/partidas/"+idPartida,
             type: 'PUT',
+            data: JSON.stringify(jugador),
             contentType: "application/json"
         });
         return r;
@@ -58,7 +59,6 @@ apiclient = (function () {
         var r = $.ajax({
             url: "territorywars/partidas/"+idPartida,
             type: 'DELETE',
-            data: JSON.stringify(jugador),
             contentType: "application/json"
         });
         return r;

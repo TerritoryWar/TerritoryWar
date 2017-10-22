@@ -6,21 +6,40 @@
 var Module = (function () {
     var usuario=null; //el objeto usuario
     var stompClient = null;
-    
+    var idPartida=null;
+    var idOponente=null;
     
     var unirseOCrearPartida = function (partidaID) {
-        conectarseAMom();
+        conectarseAMom();idPartida=partidaID;
         //subscribe to /topic/TOPICXX when connections succeed
         return new Promise((resolve, reject) => {
                 stompClient.connect({}, function (frame) {
                     stompClient.subscribe('/topic/partidas.' + partidaID, function (eventbody) {
                         var partida = JSON.parse(eventbody.body);
-                        console.log("Jugador1 es: "+partida.jugador1.usuario+ " y Jugador2 es: "+partida.jugador2.usuario);
+                        if(partida.jugador1.usuario === usuario.usuario){
+                            idOponente = partida.jugador2.usuario;
+                        }
+                        else{
+                            idOponente = partida.jugador1.usuario;
+                        }
+                        console.log("Jugador1 es: "+partida.jugador1.usuario+ " y Jugador2 es: "+partida.jugador2.usuario);    
+                        Juego.generarTablero();
                         
+                    });
+                    stompClient.subscribe('/topic/partidas.' + idPartida + "."+usuario.usuario, function (eventbody) {
+                        var coordenadas = JSON.parse(eventbody.body);
+                        Juego.moverOponente(coordenadas);
                     });
                     return resolve();
                 });});    
     };
+    
+    var publicarMovimintoAEnemigo = function (x,y,xA,yA) {
+        console.info("Publicando la posicion de nave a mi enemigo ");
+        //publicar el evento
+        stompClient.send("/topic/partidas." + idPartida + "." + idOponente, {}, JSON.stringify({"x":x,"y":y,"xA":xA,"yA":yA}));
+    };
+    
     
     var desconectar = function () {
             if (stompClient !== null) {
@@ -91,8 +110,10 @@ var Module = (function () {
             salirDelJuego();
             localStorage.removeItem('usuario');
             localStorage.removeItem('inicioSesion');
+        },
+        avisarMovimiento:function(x,y,xA,yA){
+            publicarMovimintoAEnemigo(x,y,xA,yA);
         }
-        
     };
 })();
 

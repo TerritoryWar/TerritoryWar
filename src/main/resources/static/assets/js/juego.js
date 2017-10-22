@@ -65,6 +65,7 @@ var Juego = (function () {
 
     return {
         generarTablero: function () {
+            console.log("Generando tablero")
             $("#panelJuego").css('display', 'inherit');
             $("#panelJuego").html(
                     "<div class='container'>\n\
@@ -111,6 +112,9 @@ var Juego = (function () {
                 }
             } else {
                 if (isArrayInArray(posiblesMovimientos, [x, y])) {//que si se puede mover a dicha posicion
+                    // Avisarle a mi enemigo que me movi
+                    Module.avisarMovimiento(x,7-y,posAnterior[0],7-posAnterior[1]);
+                    
                     for (var i = 0; i < posiblesMovimientos.length; i++) {
                         var x1 = posiblesMovimientos[i][0];
                         var y1 = posiblesMovimientos[i][1];
@@ -125,9 +129,14 @@ var Juego = (function () {
                     tablero[x][y] = tablero[posAnterior[0]][posAnterior[1]];
                     tablero[posAnterior[0]][posAnterior[1]] = null;
                     naveSeleccionada = false;
+                    
                 }
-            }
-
+            }   
+        },
+        moverOponente: function (coordenadas) {
+            tablero[coordenadas.xA][coordenadas.yA].moverNave(coordenadas.x, coordenadas.y);
+            tablero[coordenadas.x][coordenadas.y] = tablero[coordenadas.xA][coordenadas.yA];
+            tablero[coordenadas.xA][coordenadas.yA] = null;
         }
     };
 })();
