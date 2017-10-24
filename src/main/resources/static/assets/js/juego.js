@@ -10,7 +10,6 @@ var Juego = (function () {
     var naveSeleccionada = false; //booleano para saber si el jugador tiene una nave seleccionada
     var posiblesMovimientos = [];
     var posAnterior;
-    var finalizado = false;
 
     var genFila = function (numFila) {
         var ans = "";
@@ -52,7 +51,6 @@ var Juego = (function () {
         }
     };
 
-
     var isArrayInArray = function (arr, item) {
         var item_as_string = JSON.stringify(item);
 
@@ -61,20 +59,25 @@ var Juego = (function () {
         });
         return contains;
     };
-
+    var verificarGanador = function () {
+            var naves = contarNaves();
+            if (naves===0){
+                Module.publicarFinJuego(usuario.usuario);
+            }
+            return naves;
+    };
     var contarNaves = function () {
         var naves = 0;
         for (var i = 0; i < tablero.length; i++) {
             for (var j = 0; j < tablero[0].length; j++) {
-                if (tablero[i][j] !== undefined && tablero[i][j] !== null && tablero[i][j].getBando() === "aliado") {
+                if (tablero[i][j] !== undefined && tablero[i][j] !== null && tablero[i][j].getBando() === "enemigo") {
                     naves += 1;
                 }
             }
         }
         return naves;
     };
-
-
+    
     return {
         generarTablero: function (usuario1) {
             usuario=usuario1;
@@ -139,10 +142,6 @@ var Juego = (function () {
                 }
             }
         },
-        verificarNaves: function () {
-            var naves = contarNaves();
-            return naves;
-        },
         nuevoMovimiento: function (movimiento) {
             if(movimiento.usuarioMueve !== usuario.usuario){
                 movimiento.posAnterior.y = 7-movimiento.posAnterior.y;
@@ -151,6 +150,7 @@ var Juego = (function () {
             tablero[movimiento.posAnterior.x][movimiento.posAnterior.y].moverNave(movimiento.posSiguiente.x, movimiento.posSiguiente.y);
             tablero[movimiento.posSiguiente.x][movimiento.posSiguiente.y] = tablero[movimiento.posAnterior.x][movimiento.posAnterior.y];
             tablero[movimiento.posAnterior.x][movimiento.posAnterior.y] = null;
+            verificarGanador();
         }
     };
 })();

@@ -22,13 +22,21 @@ public class STOMPMessagesHandler {
 
     @Autowired
     SimpMessagingTemplate msgt;
-    @Autowired 
-    TerritoryWar tw=null;
+    @Autowired
+    TerritoryWar tw = null;
 
     @MessageMapping("/movimientos/partidas.{idPartida}")
     public void handleMoveEvent(Movimiento mov, @DestinationVariable String idPartida) throws Exception {
-        System.out.println(mov);
-        Partida partida=tw.getPartida(idPartida);
-        msgt.convertAndSend("/topic/movimientos/partidas."+idPartida,mov);
+        Partida partida = tw.getPartida(idPartida);
+        synchronized (partida) {
+            msgt.convertAndSend("/topic/movimientos/partidas." + idPartida, mov);
+        }
+
+    }
+
+    @MessageMapping("/ganador/partidas.{idPartida}")
+    public void handleWinEvent(String ganador, @DestinationVariable String idPartida) throws Exception {
+        // agregarle puntaje al jugador
+        msgt.convertAndSend("/topic/ganador/partidas." + idPartida, ganador);
     }
 }
