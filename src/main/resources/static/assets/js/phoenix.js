@@ -18,7 +18,7 @@ class Phoenix {
         this.tamañoTablero = 8;
         this.bando = bando;
         this.puedeMoverse = true;
-        if (this.bando == "aliado") {
+        if (this.bando === "aliado") {
             this.imageSrc = "images/PhoenixAliado.png";
         } else {
             this.imageSrc = "images/PhoenixEnemigo.png";
@@ -105,5 +105,12 @@ class Phoenix {
 
         return ans;
     }
-
+    
+    cambiarImagenAPosibleObjetivo(){
+        $("#" + this.x + "-" + this.y).html("<img src='/images/PhoenixEnemigoKill.png' height='100%' width='100%'/>");
+    }
+    
+    cambiarImagenANormal(){
+    $("#" + this.x + "-" + this.y).html("<img src='/images/PhoenixEnemigo.png' height='100%' width='100%'/>");
+    }
 }

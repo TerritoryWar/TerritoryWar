@@ -20,6 +20,11 @@ public class Posicion {
         return x;
     }
 
+    @Override
+    public String toString() {
+        return "Posicion{" + "x=" + x + ", y=" + y + '}';
+    }
+
     /**
      * @param x the x to set
      */

@@ -72,7 +72,7 @@ public class TerritoryWarAPIController {
     }
     
     @RequestMapping(path = "/partidas/{id}",method = RequestMethod.DELETE)
-    public ResponseEntity<?> partidaConJugador2(@PathVariable String id){
+    public ResponseEntity<?> oldPartida(@PathVariable String id){
             //System.out.println("saliendo el jugador "+ id);
             tw.deletePartida(id);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);

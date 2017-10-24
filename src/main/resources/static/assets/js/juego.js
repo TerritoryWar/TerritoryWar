@@ -5,7 +5,6 @@
  */
 var Juego = (function () {
     var usuario = null; //el objeto usuario
-    var stompClient = null;
     var tablero = [];
     var lenTablero = 8;
     var naveSeleccionada = false; //booleano para saber si el jugador tiene una nave seleccionada
@@ -77,7 +76,8 @@ var Juego = (function () {
 
 
     return {
-        generarTablero: function () {
+        generarTablero: function (usuario1) {
+            usuario=usuario1;
             console.log("Generando tablero");
             $("#panelJuego").css('display', 'inherit');
             $("#panelJuego").html(
@@ -111,51 +111,46 @@ var Juego = (function () {
                                 var x1 = posiblesMovimientos[i][0];
                                 var y1 = posiblesMovimientos[i][1];
                                 if (tablero[x1][y1] !== undefined && tablero[x1][y1] !== null && tablero[x1][y1].getBando() === "enemigo") {
-                                    $("#" + x1 + "-" + y1).html("<img src='/images/PhoenixEnemigoKill.png' height='100%' width='100%'/>");
+                                    tablero[x1][y1].cambiarImagenAPosibleObjetivo();
                                 } else {
                                     $("#" + x1 + "-" + y1).html("<img src='/images/posibleMovimiento.png' height='100%' width='100%'/>");
                                 }
                             }
                         }
-
                     } catch (e) {
                         console.log(e);
                     }
-
                 }
             } else {
                 if (isArrayInArray(posiblesMovimientos, [x, y])) {//que si se puede mover a dicha posicion
-                    // Avisarle a mi enemigo que me movi
-                    Module.avisarMovimiento(x, 7 - y, posAnterior[0], 7 - posAnterior[1]);
-
                     for (var i = 0; i < posiblesMovimientos.length; i++) {
                         var x1 = posiblesMovimientos[i][0];
                         var y1 = posiblesMovimientos[i][1];
                         if (tablero[x1][y1] !== undefined && tablero[x1][y1] !== null && tablero[x1][y1].getBando() === "enemigo") {
-                            $("#" + x1 + "-" + y1).html("<img src='/images/PhoenixEnemigo.png' height='100%' width='100%'/>");
+                            tablero[x1][y1].cambiarImagenANormal();
                         } else {
                             $("#" + x1 + "-" + y1).html("<img src='/images/vacio.png' height='100%' width='100%'/>");
                         }
-
                     }
-                    tablero[posAnterior[0]][posAnterior[1]].moverNave(x, y);
-                    tablero[x][y] = tablero[posAnterior[0]][posAnterior[1]];
-                    tablero[posAnterior[0]][posAnterior[1]] = null;
                     naveSeleccionada = false;
-
+                    //publicar movimiento 
+                    var movimiento = {"posAnterior":{"x":posAnterior[0],"y":posAnterior[1]},"posSiguiente":{"x":x,"y":y},"usuarioMueve":usuario.usuario,"partidaId":null};
+                    Module.publicarMovimiento(movimiento);
                 }
             }
-
-
-        },
-        moverOponente: function (coordenadas) {
-            tablero[coordenadas.xA][coordenadas.yA].moverNave(coordenadas.x, coordenadas.y);
-            tablero[coordenadas.x][coordenadas.y] = tablero[coordenadas.xA][coordenadas.yA];
-            tablero[coordenadas.xA][coordenadas.yA] = null;
         },
         verificarNaves: function () {
             var naves = contarNaves();
             return naves;
+        },
+        nuevoMovimiento: function (movimiento) {
+            if(movimiento.usuarioMueve !== usuario.usuario){
+                movimiento.posAnterior.y = 7-movimiento.posAnterior.y;
+                movimiento.posSiguiente.y = 7-movimiento.posSiguiente.y;
+            }
+            tablero[movimiento.posAnterior.x][movimiento.posAnterior.y].moverNave(movimiento.posSiguiente.x, movimiento.posSiguiente.y);
+            tablero[movimiento.posSiguiente.x][movimiento.posSiguiente.y] = tablero[movimiento.posAnterior.x][movimiento.posAnterior.y];
+            tablero[movimiento.posAnterior.x][movimiento.posAnterior.y] = null;
         }
     };
 })();

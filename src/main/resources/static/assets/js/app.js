@@ -16,6 +16,7 @@ var Module = (function () {
         //subscribe to /topic/TOPICXX when connections succeed
         return new Promise((resolve, reject) => {
                 stompClient.connect({}, function (frame) {
+                    // suscripcion para esperar a alguien e iniciar partida
                     stompClient.subscribe('/topic/partidas.' + partidaID, function (eventbody) {
                         var partida = JSON.parse(eventbody.body);
                         if(partida.jugador1.usuario === usuario.usuario){
@@ -25,26 +26,22 @@ var Module = (function () {
                             idOponente = partida.jugador1.usuario;
                         }
                         console.log("Jugador1 es: "+partida.jugador1.usuario+ " y Jugador2 es: "+partida.jugador2.usuario);    
-                        Juego.generarTablero();
+                        Juego.generarTablero(usuario);
                         
                     });
-                    stompClient.subscribe('/topic/partidas.' + idPartida + "."+usuario.usuario, function (eventbody) {
-                        var coordenadas = JSON.parse(eventbody.body);
-                        Juego.moverOponente(coordenadas);
+                    // suscripcion para que me publiquen los movimientos de mi oponente
+                    stompClient.subscribe('/topic/movimientos/partidas.' + idPartida, function (eventbody) {
+                        var movimiento = JSON.parse(eventbody.body);
+                        Juego.nuevoMovimiento(movimiento);
                         publicarMuerte();
                     });
+                    // suscripcion para conocer el perdedor 
                     stompClient.subscribe('/topic/partidas.'+idPartida+".loser",function(eventbody){
                         alert("Juego finalizado, ganador: "+JSON.parse(eventbody.body).jugadorGanador);
+                        
                     });
                     return resolve();
                 });});    
-    };
-    
-    var publicarMovimintoAEnemigo = function (x,y,xA,yA) {
-        console.info("Publicando la posicion de nave a mi enemigo ");
-        //publicar el evento
-        stompClient.send("/topic/partidas." + idPartida + "." + idOponente, {}, JSON.stringify({"x":x,"y":y,"xA":xA,"yA":yA}));
-        
     };
     
     var publicarMuerte = function (){
@@ -73,8 +70,6 @@ var Module = (function () {
     var salirDelJuego = function (){
         apiclient.salirDelJuego(usuario);
     };
-    
-    
     
     return{
         cargarUsuario:function (){
@@ -107,10 +102,7 @@ var Module = (function () {
                     //significa que hay una partida disponible y me uno a esa
                     unirseOCrearPartida(partidas[0].partidaId).then(function(){
                         apiclient.unirseAPartida(usuario,partidas[0].partidaId);
-                    });//Me uno primero para escuchar la conexion
-                    
-                    
-                    
+                    });//Me uno primero para escuchar la conexion 
                 }
                 else{
                     //no hay partidas disponibles, entonces yo creo mi partida
@@ -125,8 +117,9 @@ var Module = (function () {
             localStorage.removeItem('usuario');
             localStorage.removeItem('inicioSesion');
         },
-        avisarMovimiento:function(x,y,xA,yA){
-            publicarMovimintoAEnemigo(x,y,xA,yA);
+        publicarMovimiento: function (mov){
+            mov.partidaId = idPartida; 
+            stompClient.send("/app/movimientos/partidas." + idPartida, {}, JSON.stringify(mov));
         }
     };
 })();

@@ -110,6 +110,15 @@ public class TerritoryWar {
         return null;
     }
 
+    /**
+     * regresa la partida con el id dado
+     * @param id el id de la partida
+     * @return 
+     */
+    public Partida getPartida(String id) {
+        return twp.getPartida(id);
+    }
+
     
     
 }
