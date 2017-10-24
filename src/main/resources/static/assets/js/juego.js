@@ -60,11 +60,11 @@ var Juego = (function () {
         return contains;
     };
     var verificarGanador = function () {
-            var naves = contarNaves();
-            if (naves===0){
-                Module.publicarFinJuego(usuario.usuario);
-            }
-            return naves;
+        var naves = contarNaves();
+        if (naves === 0) {
+            Module.publicarFinJuego(usuario.usuario);
+        }
+        return naves;
     };
     var contarNaves = function () {
         var naves = 0;
@@ -77,10 +77,11 @@ var Juego = (function () {
         }
         return naves;
     };
-    
+
     return {
         generarTablero: function (usuario1) {
-            usuario=usuario1;naveSeleccionada=false;
+            usuario = usuario1;
+            naveSeleccionada = false;
             console.log("Generando tablero");
             $("#panelJuego").css('display', 'inherit');
             $("#panelJuego").html(
@@ -137,15 +138,27 @@ var Juego = (function () {
                     }
                     naveSeleccionada = false;
                     //publicar movimiento 
-                    var movimiento = {"posAnterior":{"x":posAnterior[0],"y":posAnterior[1]},"posSiguiente":{"x":x,"y":y},"usuarioMueve":usuario.usuario,"partidaId":null};
+                    var movimiento = {"posAnterior": {"x": posAnterior[0], "y": posAnterior[1]}, "posSiguiente": {"x": x, "y": y}, "usuarioMueve": usuario.usuario, "partidaId": null};
                     Module.publicarMovimiento(movimiento);
                 }
             }
         },
         nuevoMovimiento: function (movimiento) {
-            if(movimiento.usuarioMueve !== usuario.usuario){
-                movimiento.posAnterior.y = 7-movimiento.posAnterior.y;
-                movimiento.posSiguiente.y = 7-movimiento.posSiguiente.y;
+            if (naveSeleccionada && posAnterior[0] == movimiento.posSiguiente.x && posAnterior[1] == 7-movimiento.posSiguiente.y && movimiento.usuarioMueve !== usuario.usuario) {
+                naveSeleccionada = false;
+                for (var i = 0; i < posiblesMovimientos.length; i++) {
+                    var x1 = posiblesMovimientos[i][0];
+                    var y1 = posiblesMovimientos[i][1];
+                    if (tablero[x1][y1] !== undefined && tablero[x1][y1] !== null && tablero[x1][y1].getBando() === "enemigo") {
+                        tablero[x1][y1].cambiarImagenANormal();
+                    } else {
+                        $("#" + x1 + "-" + y1).html("<img src='/images/vacio.png' height='100%' width='100%'/>");
+                    }
+                }
+            }
+            if (movimiento.usuarioMueve !== usuario.usuario) {
+                movimiento.posAnterior.y = 7 - movimiento.posAnterior.y;
+                movimiento.posSiguiente.y = 7 - movimiento.posSiguiente.y;
             }
             tablero[movimiento.posAnterior.x][movimiento.posAnterior.y].moverNave(movimiento.posSiguiente.x, movimiento.posSiguiente.y);
             tablero[movimiento.posSiguiente.x][movimiento.posSiguiente.y] = tablero[movimiento.posAnterior.x][movimiento.posAnterior.y];
