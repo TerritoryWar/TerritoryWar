@@ -80,7 +80,7 @@ var Juego = (function () {
     
     return {
         generarTablero: function (usuario1) {
-            usuario=usuario1;
+            usuario=usuario1;naveSeleccionada=false;
             console.log("Generando tablero");
             $("#panelJuego").css('display', 'inherit');
             $("#panelJuego").html(
