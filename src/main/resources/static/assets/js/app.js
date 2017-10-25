@@ -40,6 +40,7 @@ var Module = (function () {
                     $("#panelJuego").html(
                             "<div class='inner'><img src='images/Loading2.gif' alt='Cargando' style='width:60%;height:60%;'/></div>"
                             );
+                    window.location.href="#banner";
                     desconectar();
                 });
                 return resolve();
