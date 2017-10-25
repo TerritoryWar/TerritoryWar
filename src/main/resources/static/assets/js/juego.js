@@ -91,6 +91,18 @@ var Juego = (function () {
 
     };
 
+    var pintarPosiblesMovimientos = function () {
+        for (var i = 0; i < posiblesMovimientos.length; i++) {
+            var x1 = posiblesMovimientos[i][0];
+            var y1 = posiblesMovimientos[i][1];
+            if (tablero[x1][y1] !== undefined && tablero[x1][y1] !== null && tablero[x1][y1].getBando() === "enemigo") {
+                tablero[x1][y1].cambiarImagenAPosibleObjetivo();
+            } else {
+                $("#" + x1 + "-" + y1).html("<img src='/images/posibleMovimiento.png' height='100%' width='100%'/>");
+            }
+        }
+    };
+
     return {
         generarTablero: function (usuario1) {
             usuario = usuario1;
@@ -116,7 +128,7 @@ var Juego = (function () {
 
         },
         oprimiBoton: function (x, y) {
-            if(naveSeleccionada && tablero[x][y]!==null && tablero[x][y] !== undefined && tablero[x][y].getBando() === "aliado"){
+            if (naveSeleccionada && tablero[x][y] !== null && tablero[x][y] !== undefined && tablero[x][y].getBando() === "aliado") {
                 limpiarObjetivos();
                 naveSeleccionada = false;
             }
@@ -128,15 +140,7 @@ var Juego = (function () {
                         if (posiblesMovimientos.length >= 1) {
                             naveSeleccionada = true;
                             posAnterior = [x, y];
-                            for (var i = 0; i < posiblesMovimientos.length; i++) {
-                                var x1 = posiblesMovimientos[i][0];
-                                var y1 = posiblesMovimientos[i][1];
-                                if (tablero[x1][y1] !== undefined && tablero[x1][y1] !== null && tablero[x1][y1].getBando() === "enemigo") {
-                                    tablero[x1][y1].cambiarImagenAPosibleObjetivo();
-                                } else {
-                                    $("#" + x1 + "-" + y1).html("<img src='/images/posibleMovimiento.png' height='100%' width='100%'/>");
-                                }
-                            }
+                            pintarPosiblesMovimientos();
                         }
                     } catch (e) {
                         console.log(e);
@@ -160,12 +164,16 @@ var Juego = (function () {
                     naveSeleccionada = false;
                     limpiarObjetivos();
                 }
-                
+
             }
             tablero[movimiento.posAnterior.x][movimiento.posAnterior.y].moverNave(movimiento.posSiguiente.x, movimiento.posSiguiente.y);
             tablero[movimiento.posSiguiente.x][movimiento.posSiguiente.y] = tablero[movimiento.posAnterior.x][movimiento.posAnterior.y];
             tablero[movimiento.posAnterior.x][movimiento.posAnterior.y] = null;
-            if (movimiento.usuarioMueve !== usuario.usuario && naveSeleccionada && isArrayInArray(posiblesMovimientos, [movimiento.posSiguiente.x,movimiento.posSiguiente.y])){
+            if (movimiento.usuarioMueve !== usuario.usuario && naveSeleccionada && posiblesMovimientos.length !== tablero[posAnterior[0]][posAnterior[1]].getPosiblesMovimientos(tablero).length) {
+                posiblesMovimientos = tablero[posAnterior[0]][posAnterior[1]].getPosiblesMovimientos(tablero);
+                if(posiblesMovimientos.length>0)pintarPosiblesMovimientos();
+            }
+            if (movimiento.usuarioMueve !== usuario.usuario && naveSeleccionada && isArrayInArray(posiblesMovimientos, [movimiento.posSiguiente.x, movimiento.posSiguiente.y])) {
                 tablero[movimiento.posSiguiente.x][movimiento.posSiguiente.y].cambiarImagenAPosibleObjetivo();
             }
             verificarGanador();
