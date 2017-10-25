@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.eci.arsw.territorywar.mom;
+package edu.eci.arsw.territorywar.model;
 
-import edu.eci.arsw.territorywar.model.Posicion;
+
 
 /**
  *
  * @author carlo
  */
-class Movimiento {
+public class Movimiento {
     private Posicion posAnterior;
     private Posicion posSiguiente;
     private String usuarioMueve;
@@ -76,8 +76,5 @@ class Movimiento {
      */
     public void setUsuarioMueve(String usuarioMueve) {
         this.usuarioMueve = usuarioMueve;
-    }
-
- 
-    
+    } 
 }

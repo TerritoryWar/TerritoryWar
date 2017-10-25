@@ -7,12 +7,9 @@ package edu.eci.arsw.territorywar.services;
 
 import edu.eci.arsw.territorywar.exceptions.TerritoryWarException;
 import edu.eci.arsw.territorywar.model.Jugador;
-import edu.eci.arsw.territorywar.model.Nave;
 import edu.eci.arsw.territorywar.model.Partida;
-import edu.eci.arsw.territorywar.model.Posicion;
 import edu.eci.arsw.territorywar.mom.MessageManagment;
 import edu.eci.arsw.territorywar.persistence.TerritoryWarPersistence;
-import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -88,28 +85,6 @@ public class TerritoryWar {
         twp.registrarJugador(jugador);
     }
     
-    /**
-     * Mueve una nave a una nueva posicion deseada 
-     * @param jugador el jugador que va a mover la nave
-     * @param partida la partida en donde se movera la nave
-     * @param nave la nave del jugador que desea mover
-     * @param posSiguiente la nueva posicion en la que el jugador quiere ubicar su nave
-     */
-    public  void moverNave(Jugador jugador, Partida partida,Nave nave, Posicion posSiguiente){
-    
-    }
-    
-    /**
-     * Valida los posibles movimientos que puede tener la nave, es decir segun el estilo de nave analiza a donde podria mover correctamente
-     * @param jugador el jugador que va a mover la nave
-     * @param partida la partida en donde se movera la nave
-     * @param nave la nave la cual se quiere mover, y la que quiere que le analicen los posibles lugares a donde podria ir
-     * @return una lista correspondiente a las posiciones a donde seria consistente mover la nave
-     */
-    public static List<Posicion> validarMovimiento(Jugador jugador, Partida partida,Nave nave){
-        return null;
-    }
-
     /**
      * regresa la partida con el id dado
      * @param id el id de la partida
