@@ -8,7 +8,7 @@ package edu.eci.arsw.territorywar.test.persistence;
 import edu.eci.arsw.territorywar.exceptions.TerritoryWarException;
 import edu.eci.arsw.territorywar.model.Jugador;
 import edu.eci.arsw.territorywar.persistence.TerritoryWarPersistence;
-import edu.eci.arsw.territorywar.persistence.impl.TerritoryWarPersistenceDataStructures;
+import edu.eci.arsw.territorywar.persistence.impl.TerritoryWarPersistenceStub;
 import edu.eci.arsw.territorywar.services.TerritoryWar;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -22,7 +22,7 @@ public class TerritoryWarTest {
     
     @Test
     public void deberiaRegistrarJugador() throws TerritoryWarException{
-        TerritoryWarPersistence tw = new TerritoryWarPersistenceDataStructures();
+        TerritoryWarPersistence tw = new TerritoryWarPersistenceStub();
         Jugador jugador= new Jugador("CMS","123456", "Carlos", "carlos.sanchez-v@mail.escuelaing.edu.co");
         tw.registrarJugador(jugador);
         //no deberia dejarlo agregar dos veces
@@ -36,7 +36,7 @@ public class TerritoryWarTest {
     
     @Test
     public void deberiaValidarCredencialesCorrectamente() throws TerritoryWarException{
-        TerritoryWarPersistence tw = new TerritoryWarPersistenceDataStructures();
+        TerritoryWarPersistence tw = new TerritoryWarPersistenceStub();
         Jugador jugador= new Jugador("CMS3","123456", "Carlos", "carlos.sanchez-v@mail.escuelaing.edu.co");
         tw.registrarJugador(jugador);
         try{
@@ -51,7 +51,7 @@ public class TerritoryWarTest {
     
     @Test
     public void NodeberiaValidarCredenciales() throws TerritoryWarException{
-        TerritoryWarPersistence tw = new TerritoryWarPersistenceDataStructures();
+        TerritoryWarPersistence tw = new TerritoryWarPersistenceStub();
         Jugador jugador= new Jugador("CMS2","123456", "Carlos", "carlos.sanchez-v@mail.escuelaing.edu.co");
         tw.registrarJugador(jugador);
         try{

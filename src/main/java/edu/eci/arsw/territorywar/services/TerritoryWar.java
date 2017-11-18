@@ -5,6 +5,7 @@
  */
 package edu.eci.arsw.territorywar.services;
 
+import edu.eci.arsw.territorywar.caching.TerritoryWarCache;
 import edu.eci.arsw.territorywar.exceptions.TerritoryWarException;
 import edu.eci.arsw.territorywar.model.Jugador;
 import edu.eci.arsw.territorywar.model.Partida;
@@ -23,6 +24,8 @@ public class TerritoryWar {
     @Autowired
     TerritoryWarPersistence twp;
     @Autowired
+    TerritoryWarCache twc;
+    @Autowired
     MessageManagment mm;
     
     public TerritoryWar(){
@@ -35,8 +38,8 @@ public class TerritoryWar {
      * @throws TerritoryWarException si ya esta llena la partida
      */
     public void unirAPartida(String id, Jugador jugador2) throws TerritoryWarException{
-        twp.unirAPartida(id,jugador2);
-        mm.reportarAmbosJugadores(twp.getPartida(id));
+        twc.unirAPartida(id,jugador2);
+        mm.reportarAmbosJugadores(twc.getPartida(id));
     }
     
     
@@ -45,7 +48,7 @@ public class TerritoryWar {
      * @param jugador uno de los jugadores involucrados en el enfrentamiento
      */
     public  void crearPartida(Jugador jugador){
-        twp.crearPartida(jugador);
+        twc.crearPartida(jugador);
     }
     
     
@@ -54,7 +57,7 @@ public class TerritoryWar {
      * @return 
      */
     public  Set<Partida> getPartidasDisponibles(){
-        return twp.getPartidasDisponibles();
+        return twc.getPartidasDisponibles();
     }
     
     /**
@@ -62,7 +65,7 @@ public class TerritoryWar {
      * @param idPartida, el id de la partida
      */
     public  void deletePartida(String idPartida){
-        twp.deletePartida(idPartida);
+        twc.deletePartida(idPartida);
     }
     
     /**
@@ -91,7 +94,7 @@ public class TerritoryWar {
      * @return 
      */
     public Partida getPartida(String id) {
-        return twp.getPartida(id);
+        return twc.getPartida(id);
     }
 
     
