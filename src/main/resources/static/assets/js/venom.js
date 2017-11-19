@@ -26,6 +26,7 @@ class Venom {
         } else {
             this.imageSrc = "images/VenomEnemigo.png";
         }
+        
         this.ponerImagen();
     }
 
