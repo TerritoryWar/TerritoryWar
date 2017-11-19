@@ -34,12 +34,6 @@ var Juego = (function () {
     };
 
     var genNavesAliadas = function () {
-        //Por el momento solo phoenix
-        /*for (var i = lenTablero - 2; i < lenTablero; i++) {
-            for (var j = 0; j < lenTablero; j++) {
-                tablero[j][i] = new Phoenix(j, i, "aliado");
-            }
-        }*/
         //phoenix aliadas
         for (var i = 0; i < lenTablero; i++) {
             tablero[i][lenTablero - 2] = new Phoenix(i,lenTablero - 2, "aliado",lenTablero);
@@ -47,15 +41,18 @@ var Juego = (function () {
         //vengeance aliadas
         tablero[0][lenTablero - 1] = new Vengeance(0,lenTablero - 1,"aliado",lenTablero);
         tablero[lenTablero - 1][lenTablero -1 ] = new Vengeance(lenTablero - 1,lenTablero -1,"aliado",lenTablero);
+        //diminisher aliadas
+        tablero[1][lenTablero - 1] = new Diminisher(1,lenTablero - 1,"aliado",lenTablero);
+        tablero[lenTablero - 2][lenTablero -1 ] = new Diminisher(lenTablero - 2,lenTablero -1,"aliado",lenTablero);
+        //sentinel aliada
+        tablero[4][lenTablero - 1] = new Sentinel(4,lenTablero - 1,"aliado",lenTablero);
+        //venoms aliadas
+        tablero[2][lenTablero - 1] = new Venom(2,lenTablero - 1,"aliado",lenTablero);
+        tablero[lenTablero - 3][lenTablero -1 ] = new Venom(lenTablero - 3,lenTablero -1,"aliado",lenTablero);
+        tablero[3][lenTablero - 1] = new Venom(3,lenTablero - 1,"aliado",lenTablero);
     };
 
     var genNavesEnemigas = function () {
-        //Por el momento solo phoenix
-        /*for (var i = 0; i < 2; i++) {
-            for (var j = 0; j < lenTablero; j++) {
-                tablero[j][i] = new Phoenix(j, i, "enemigo");
-            }
-        }*/
         //phoenix enemigas
         for (var i = 0; i < lenTablero; i++) {
             tablero[i][1] = new Phoenix(i,1, "enemigo",lenTablero);
@@ -63,6 +60,15 @@ var Juego = (function () {
         //vengeance enemigas
         tablero[0][0] = new Vengeance(0,0,"enemigo",lenTablero);
         tablero[lenTablero -1 ][0] = new Vengeance(lenTablero -1,0,"enemigo",lenTablero);
+        //diminisher enemigas
+        tablero[1][0] = new Diminisher(1,0,"enemigo",lenTablero);
+        tablero[lenTablero -2 ][0] = new Diminisher(lenTablero -2,0,"enemigo",lenTablero);
+        //sentinel enemiga
+        tablero[4][0] = new Sentinel(4,0,"enemigo",lenTablero);
+        //venom enemigas
+        tablero[2][0] = new Venom(2,0,"enemigo",lenTablero);
+        tablero[lenTablero -3 ][0] = new Venom(lenTablero -3,0,"enemigo",lenTablero);
+        tablero[3][0] = new Venom(3,0,"enemigo",lenTablero);
     };
 
     var isArrayInArray = function (arr, item) {
