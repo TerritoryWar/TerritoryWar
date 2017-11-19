@@ -9,13 +9,14 @@ class Phoenix {
      * @param {type} x, posicion en x
      * @param {type} y, posicion en y
      * @param {type} bando, el bando, puede ser "aliado" o "enemigo"
+     * @param {type} lenTablero, la longitud del tablero
      * @return {Phoenix} la nueva nave
      */
-    constructor(x, y, bando) {
+    constructor(x, y, bando,lenTablero) {
         this.x = x;
         this.y = y;
         this.type = "Phoenix";
-        this.tamañoTablero = 8;
+        this.tamañoTablero = lenTablero;
         this.bando = bando;
         this.puedeMoverse = true;
         if (this.bando === "aliado") {

@@ -35,20 +35,34 @@ var Juego = (function () {
 
     var genNavesAliadas = function () {
         //Por el momento solo phoenix
-        for (var i = lenTablero - 2; i < lenTablero; i++) {
+        /*for (var i = lenTablero - 2; i < lenTablero; i++) {
             for (var j = 0; j < lenTablero; j++) {
                 tablero[j][i] = new Phoenix(j, i, "aliado");
             }
-        }
+        }*/
+        //phoenix aliadas
+        for (var i = 0; i < lenTablero; i++) {
+            tablero[i][lenTablero - 2] = new Phoenix(i,lenTablero - 2, "aliado",lenTablero);
+        };
+        //vengeance aliadas
+        tablero[0][lenTablero - 1] = new Vengeance(0,lenTablero - 1,"aliado",lenTablero);
+        tablero[lenTablero - 1][lenTablero -1 ] = new Vengeance(lenTablero - 1,lenTablero -1,"aliado",lenTablero);
     };
 
     var genNavesEnemigas = function () {
         //Por el momento solo phoenix
-        for (var i = 0; i < 2; i++) {
+        /*for (var i = 0; i < 2; i++) {
             for (var j = 0; j < lenTablero; j++) {
                 tablero[j][i] = new Phoenix(j, i, "enemigo");
             }
-        }
+        }*/
+        //phoenix enemigas
+        for (var i = 0; i < lenTablero; i++) {
+            tablero[i][1] = new Phoenix(i,1, "enemigo",lenTablero);
+        };
+        //vengeance enemigas
+        tablero[0][0] = new Vengeance(0,0,"enemigo",lenTablero);
+        tablero[lenTablero -1 ][0] = new Vengeance(lenTablero -1,0,"enemigo",lenTablero);
     };
 
     var isArrayInArray = function (arr, item) {
