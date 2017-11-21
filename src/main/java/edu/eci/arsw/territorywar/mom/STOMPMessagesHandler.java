@@ -22,10 +22,8 @@ import edu.eci.arsw.territorywar.model.Movimiento;
 @Controller
 public class STOMPMessagesHandler {
 
-    @Autowired
-    SimpMessagingTemplate msgt;
-    @Autowired
-    TerritoryWar tw = null;
+    private @Autowired SimpMessagingTemplate msgt;
+    private @Autowired TerritoryWar tw = null;
 
     @MessageMapping("/movimientos/partidas.{idPartida}")
     public void handleMoveEvent(Movimiento mov, @DestinationVariable String idPartida) throws Exception {

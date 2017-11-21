@@ -21,15 +21,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TerritoryWar {
-    @Autowired
-    TerritoryWarPersistence twp;
-    @Autowired
-    TerritoryWarCache twc;
-    @Autowired
-    MessageManagment mm;
-    
-    public TerritoryWar(){
-    }
+    private @Autowired TerritoryWarPersistence twp;
+    private @Autowired TerritoryWarCache twc;
+    private @Autowired MessageManagment mm;
     
     /**
      * Une a la partida al segundo jugador

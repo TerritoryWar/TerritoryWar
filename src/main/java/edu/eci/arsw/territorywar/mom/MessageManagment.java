@@ -16,8 +16,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MessageManagment {
-    @Autowired
-    SimpMessagingTemplate msgt;
+    private @Autowired SimpMessagingTemplate msgt;
     
     /**
      * Reportarle a ambos jugadores que ya la partida esta completa para iniciar a jugar

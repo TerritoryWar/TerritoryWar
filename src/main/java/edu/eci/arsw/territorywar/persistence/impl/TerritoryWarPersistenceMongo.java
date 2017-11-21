@@ -1,6 +1,5 @@
 package edu.eci.arsw.territorywar.persistence.impl;
 
-import edu.eci.arsw.territorywar.model.Jugador;
 import edu.eci.arsw.territorywar.persistence.TerritoryWarPersistence;
 //import org.springframework.data.mongodb.repository.MongoRepository;
 

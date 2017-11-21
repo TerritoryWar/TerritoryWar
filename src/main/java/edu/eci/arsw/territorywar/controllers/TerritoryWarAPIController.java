@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/territorywars")
 public class TerritoryWarAPIController {
-    @Autowired TerritoryWar tw=null;
+    private @Autowired TerritoryWar tw=null;
     
     @RequestMapping(path = "/personas",method = RequestMethod.POST)
     public ResponseEntity<?> newJugador(@RequestBody Jugador p){

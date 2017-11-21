@@ -9,6 +9,14 @@ var Module = (function () {
     var idPartida = null;
     var idOponente = null;
     
+    var conectarseAMom = function () {
+        if (stompClient !== null) {
+            stompClient.disconnect();
+        }
+        var socket = new SockJS('/stompendpoint');
+        stompClient = Stomp.over(socket);
+    };
+    
     var suscribirseParaJugar = function (partidaID) {
         conectarseAMom();
         idPartida = partidaID;
@@ -53,15 +61,6 @@ var Module = (function () {
             stompClient.disconnect();
         }
     };
-
-    var conectarseAMom = function () {
-        if (stompClient !== null) {
-            stompClient.disconnect();
-        }
-        var socket = new SockJS('/stompendpoint');
-        stompClient = Stomp.over(socket);
-    };
-
 
     var salirDelJuego = function () {
         apiclient.salirDelJuego(usuario);
