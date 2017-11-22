@@ -143,7 +143,7 @@ var Juego = (function () {
                     
                     //ESTADO DE JUEGO
             
-                    "<div class='row'>\n\
+                    "<div class='row' style='padding-left: inherit;'>\n\
                         <div>\n\
                             <h5 style='text-align: center;'> Cantidad de naves tuyas("+usuario.usuario+"): </h5>\n\
                             <h3 id='navesUser'> ?? </h3>\n\
@@ -153,7 +153,7 @@ var Juego = (function () {
                             <h3 id='navesOponent'> ?? </h3>\n\
                         </div>\n\
                         <div>\n\
-                            <h5 style='text-align: center;'> Tiempo restante:</h5>\n\
+                            <h5 style='text-align: center;'> Tiempo para finalizar:</h5>\n\
                             <h3 id='timeFinish'> ?? </h3>\n\
                         </div>\n\
                     </div>"
