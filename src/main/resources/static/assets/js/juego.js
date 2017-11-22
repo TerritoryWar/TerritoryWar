@@ -124,21 +124,41 @@ var Juego = (function () {
     };
 
     return {
-        generarTablero: function (usuario1) {
+        generarTablero: function (usuario1,oponente) {
             usuario = usuario1;
             naveSeleccionada = false;
             console.log("Generando tablero");
             $("#panelJuego").css('display', 'inherit');
             $("#panelJuego").html(
+                    
+                    //ESTADO DE JUEGO
+            
+                    "<div class='row'>\n\
+                        <div>\n\
+                            <h5 style='text-align: center;'> Cantidad de naves tuyas("+usuario.usuario+"): </h5>\n\
+                            <h3 id='navesUser'> 16 </h3>\n\
+                        </div>\n\
+                        <div>\n\
+                            <h5 style='text-align: center;'> Cantidad de naves de tu oponente("+oponente+"): </h5>\n\
+                            <h3 id='navesOponent'> 16 </h3>\n\
+                        </div>\n\
+                        <div>\n\
+                            <h5 style='text-align: center;'> Tiempo restante:</h5>\n\
+                            <h3 id='timeFinish'> ?? </h3>\n\
+                        </div>\n\
+                    </div>"
+            
+                    + //TABLERO
+            
                     "<div class='container'>\n\
                         <div class='row'>\n\
- -                            <div class='col-md-3 col-md-offset-100'></div>\n\
- -                            <table style='table-layout:fixed;'>\n\
+                            <div class='col-md-3 col-md-offset-100'></div>\n\
+                            <table style='table-layout:fixed;'>\n\
                                 " + genTodasFilas() + "\
                             </table>\n\
                             <div ></div>\n\
                         </div>\n\
-                   </div>"
+                    </div>"
                     );
             for (var i = 0; i < lenTablero; i++) {
                 tablero[i] = [];

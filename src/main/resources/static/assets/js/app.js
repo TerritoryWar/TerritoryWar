@@ -32,7 +32,7 @@ var Module = (function () {
                         idOponente = partida.jugador1.usuario;
                     }
                     console.log("Jugador1 es: " + partida.jugador1.usuario + " y Jugador2 es: " + partida.jugador2.usuario);
-                    Juego.generarTablero(usuario);
+                    Juego.generarTablero(usuario,idOponente);
 
                 });
                 // suscripcion para que me publiquen los movimientos de mi oponente
