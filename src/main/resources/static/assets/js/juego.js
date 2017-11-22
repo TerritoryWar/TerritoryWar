@@ -10,6 +10,8 @@ var Juego = (function () {
     var naveSeleccionada = false; //booleano para saber si el jugador tiene una nave seleccionada
     var posiblesMovimientos = [];
     var posAnterior;
+    var navesUser = 16;
+    var navesOponent = 16;
 
     var genFila = function (numFila) {
         var ans = "";
@@ -80,22 +82,30 @@ var Juego = (function () {
         return contains;
     };
     var verificarGanador = function () {
-        var naves = contarNaves();
-        if (naves === 0) {
+        contarNaves();
+        if (navesOponent === 0) {
             Module.publicarFinJuego(usuario.usuario);
         }
-        return naves;
+        return navesOponent;
     };
     var contarNaves = function () {
-        var naves = 0;
+        navesUser=0;navesOponent=0;
         for (var i = 0; i < tablero.length; i++) {
             for (var j = 0; j < tablero[0].length; j++) {
-                if (tablero[i][j] !== undefined && tablero[i][j] !== null && tablero[i][j].getBando() === "enemigo") {
-                    naves += 1;
+                if (tablero[i][j] !== undefined && tablero[i][j] !== null && tablero[i][j].getBando() === "aliado") {
+                    navesUser += 1;
                 }
             }
         }
-        return naves;
+        for (var i = 0; i < tablero.length; i++) {
+            for (var j = 0; j < tablero[0].length; j++) {
+                if (tablero[i][j] !== undefined && tablero[i][j] !== null && tablero[i][j].getBando() === "enemigo") {
+                    navesOponent += 1;
+                }
+            }
+        }
+        $("#navesUser").html("<h3 id='navesUser'> "+navesUser+" </h3>");
+        $("#navesOponent").html("<h3 id='navesOponent'> "+navesOponent+" </h3>");
     };
 
     var limpiarObjetivos = function () {
@@ -136,11 +146,11 @@ var Juego = (function () {
                     "<div class='row'>\n\
                         <div>\n\
                             <h5 style='text-align: center;'> Cantidad de naves tuyas("+usuario.usuario+"): </h5>\n\
-                            <h3 id='navesUser'> 16 </h3>\n\
+                            <h3 id='navesUser'> ?? </h3>\n\
                         </div>\n\
                         <div>\n\
                             <h5 style='text-align: center;'> Cantidad de naves de tu oponente("+oponente+"): </h5>\n\
-                            <h3 id='navesOponent'> 16 </h3>\n\
+                            <h3 id='navesOponent'> ?? </h3>\n\
                         </div>\n\
                         <div>\n\
                             <h5 style='text-align: center;'> Tiempo restante:</h5>\n\
@@ -165,6 +175,7 @@ var Juego = (function () {
             }
             genNavesAliadas();
             genNavesEnemigas();
+            contarNaves();
 
         },
         oprimiBoton: function (x, y) {
