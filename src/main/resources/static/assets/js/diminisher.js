@@ -71,13 +71,13 @@ class Diminisher {
             this.setPuedeMoverse(false);
             var este = this;
             setTimeout(function () {
-                $("#" + this.x + "-" + this.y).html("<img src='/images/DiminisherAliadoTime3.png' height='100%' width='100%'/>");
+                $("#" + este.x + "-" + este.y).html("<img src='/images/DiminisherAliadoTime3.png' height='100%' width='100%'/>");
             }, 1000);
             setTimeout(function () {
-                $("#" + this.x + "-" + this.y).html("<img src='/images/DiminisherAliadoTime2.png' height='100%' width='100%'/>");
+                $("#" + este.x + "-" + este.y).html("<img src='/images/DiminisherAliadoTime2.png' height='100%' width='100%'/>");
             }, 2000);
             setTimeout(function () {
-                $("#" + this.x + "-" + this.y).html("<img src='/images/DiminisherAliadoTime1.png' height='100%' width='100%'/>");
+                $("#" + este.x + "-" + este.y).html("<img src='/images/DiminisherAliadoTime1.png' height='100%' width='100%'/>");
             }, 3000);
             setTimeout(function () {
                 este.setPuedeMoverse(true);

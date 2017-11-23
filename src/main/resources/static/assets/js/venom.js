@@ -68,14 +68,17 @@ class Venom {
             $("#" + this.x + "-" + this.y).html("<img src='/images/vacio.png' height='100%' width='100%'/>");
             this.x = x;
             this.y = y;
+            console.log("En time 3");
             $("#" + this.x + "-" + this.y).html("<img src='/images/VenomAliadoTime3.png' height='100%' width='100%'/>");
             this.setPuedeMoverse(false);
             var este = this;
             setTimeout(function () {
-                $("#" + this.x + "-" + this.y).html("<img src='/images/VenomAliadoTime2.png' height='100%' width='100%'/>");
+                console.log("En time 2");
+                $("#" + este.x + "-" + este.y).html("<img src='/images/VenomAliadoTime2.png' height='100%' width='100%'/>");
             }, 1000);
             setTimeout(function () {
-                $("#" + this.x + "-" + this.y).html("<img src='/images/VenomAliadoTime1.png' height='100%' width='100%'/>");
+                console.log("En time 1");
+                $("#" + este.x + "-" + este.y).html("<img src='/images/VenomAliadoTime1.png' height='100%' width='100%'/>");
             }, 2000);
             setTimeout(function () {
                 este.setPuedeMoverse(true);

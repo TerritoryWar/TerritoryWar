@@ -71,7 +71,7 @@ class Vengeance {
             this.setPuedeMoverse(false);
             var este = this;
             setTimeout(function () {
-                $("#" + this.x + "-" + this.y).html("<img src='/images/VengeanceAliadoTime1.png' height='100%' width='100%'/>");
+                $("#" + este.x + "-" + este.y).html("<img src='/images/VengeanceAliadoTime1.png' height='100%' width='100%'/>");
             }, 1000);
             setTimeout(function () {
                 este.setPuedeMoverse(true);
