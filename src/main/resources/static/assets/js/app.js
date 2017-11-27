@@ -33,7 +33,6 @@ var Module = (function () {
                     }
                     console.log("Jugador1 es: " + partida.jugador1.usuario + " y Jugador2 es: " + partida.jugador2.usuario);
                     Juego.generarTablero(usuario,idOponente);
-
                 });
                 // suscripcion para que me publiquen los movimientos de mi oponente
                 stompClient.subscribe('/topic/movimientos/partidas.' + idPartida, function (eventbody) {

@@ -12,7 +12,20 @@ var Juego = (function () {
     var posAnterior;
     var navesUser = 16;
     var navesOponent = 16;
-
+    
+    var startTime = function(){
+        var segundos = 20;
+        var s = document.getElementById("timeFinish");
+        
+        var cronometer = setInterval(function (){
+            segundos--;
+            s.innerHTML = segundos+" segundos";
+            if(segundos === 0){
+                verificarGanadorTiempo();
+            }
+        },1000);
+    };
+    
     var genFila = function (numFila) {
         var ans = "";
         for (var i = 0; i < 8; i++) {
@@ -88,6 +101,16 @@ var Juego = (function () {
         }
         return navesOponent;
     };
+    
+    var verificarGanadorTiempo = function () {
+        ("#timeFinish").html("0 segundos");
+        contarNaves();
+        if (navesUser > navesOponent) {
+            Module.publicarFinJuego(usuario.usuario);
+        }
+        return navesOponent;
+    };
+    
     var contarNaves = function () {
         navesUser=0;navesOponent=0;
         for (var i = 0; i < tablero.length; i++) {
@@ -154,7 +177,7 @@ var Juego = (function () {
                         </div>\n\
                         <div>\n\
                             <h5 style='text-align: center;'> Tiempo para finalizar:</h5>\n\
-                            <h3 id='timeFinish'> ?? </h3>\n\
+                            <h3 id='timeFinish'> 120 segundos </h3>\n\
                         </div>\n\
                     </div>"
             
@@ -176,6 +199,7 @@ var Juego = (function () {
             genNavesAliadas();
             genNavesEnemigas();
             contarNaves();
+            startTime();
 
         },
         oprimiBoton: function (x, y) {
