@@ -41,7 +41,13 @@ var Module = (function () {
                 });
                 // suscripcion para conocer el perdedor 
                 stompClient.subscribe('/topic/ganador/partidas.' + idPartida , function (eventbody) {
-                    alert("Juego finalizado, ganador: " + JSON.parse(eventbody.body).jugadorGanador);
+                    if(JSON.parse(eventbody.body).jugadorGanador === "empate"){
+                       alert("Juego finalizado por tiempo, hubo un empate");
+                    }
+                    else{
+                        alert("Juego finalizado, ganador: " + JSON.parse(eventbody.body).jugadorGanador);
+                    }
+                    
                     $("#botonJugar").css('visibility', 'visible');
                     $("#panelJuego").css('display', 'none');
                     $("#panelJuego").html(

@@ -14,13 +14,14 @@ var Juego = (function () {
     var navesOponent = 16;
     
     var startTime = function(){
-        var segundos = 20;
+        var segundos = 10;
         var s = document.getElementById("timeFinish");
         
         var cronometer = setInterval(function (){
             segundos--;
             s.innerHTML = segundos+" segundos";
             if(segundos === 0){
+                $("#timeFinish").html("<h3 id='timeFinish'> 0 segundos </h3>");
                 verificarGanadorTiempo();
             }
         },1000);
@@ -103,10 +104,12 @@ var Juego = (function () {
     };
     
     var verificarGanadorTiempo = function () {
-        ("#timeFinish").html("0 segundos");
         contarNaves();
         if (navesUser > navesOponent) {
             Module.publicarFinJuego(usuario.usuario);
+        }
+        else if (navesUser === navesOponent){
+            Module.publicarFinJuego("empate");
         }
         return navesOponent;
     };
