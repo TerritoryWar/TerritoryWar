@@ -1,6 +1,8 @@
 package edu.eci.arsw.territorywar.persistence.impl;
 
+import edu.eci.arsw.territorywar.model.Jugador;
 import edu.eci.arsw.territorywar.persistence.TerritoryWarPersistence;
+import org.springframework.data.mongodb.repository.MongoRepository;
 //import org.springframework.data.mongodb.repository.MongoRepository;
 
 /*
@@ -13,6 +15,6 @@ import edu.eci.arsw.territorywar.persistence.TerritoryWarPersistence;
  *
  * @author carlo
  */
-public interface TerritoryWarPersistenceMongo extends TerritoryWarPersistence{// ,MongoRepository<Jugador, String> {
+public interface TerritoryWarPersistenceMongo extends TerritoryWarPersistence ,MongoRepository<Jugador, String> {
     
 }

@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  *
  * @author jhord
  */
-@Service
+//@Service
 public class TerritoryWarPersistenceStub implements TerritoryWarPersistence{
     private static Map<String,Jugador> jugadores = new ConcurrentHashMap<>();
 

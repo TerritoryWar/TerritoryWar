@@ -5,13 +5,17 @@
  */
 package edu.eci.arsw.territorywar.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.util.DigestUtils;
 
 /**
  *
  * @author carlo
  */
+@Document(collection = "territory-war")
 public class Jugador {
+    @Id
     private String usuario;
     private String contrasena;
     private String nombre;

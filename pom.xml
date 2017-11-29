@@ -24,11 +24,11 @@
     
     
     <dependencies>
-        <!-- Para MONGO
+        <!-- Para MONGO-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
-        </dependency>-->
+        </dependency>
         <!-- Para REDIS-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
