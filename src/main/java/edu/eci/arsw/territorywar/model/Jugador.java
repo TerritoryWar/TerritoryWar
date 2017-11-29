@@ -13,17 +13,21 @@ import org.springframework.util.DigestUtils;
  *
  * @author carlo
  */
-@Document(collection = "territory-war")
+@Document(collection = "usuarios")
 public class Jugador {
     @Id
-    private String usuario;
+    private String id;
+    
+    
     private String contrasena;
     private String nombre;
     private String correo;
 
-    public Jugador(String usuario, String contrasena, String nombre, String correo) {
-        this.usuario = usuario;
-        this.contrasena = DigestUtils.md5DigestAsHex(contrasena.getBytes()).toUpperCase();
+    public Jugador(String id, String contrasena, String nombre, String correo) {
+        this.id = id;
+        this.contrasena = contrasena;//DigestUtils.md5DigestAsHex(contrasena.getBytes()).toUpperCase();
+        System.out.println("en creador");
+        System.out.println(this.contrasena);
         this.nombre = nombre;
         this.correo = correo;
     }
@@ -38,24 +42,24 @@ public class Jugador {
      */
     public boolean equals(Jugador jugador){
         boolean ans = false;
-        if(this.usuario.equals(jugador.usuario) && this.contrasena.equals(jugador.contrasena)){
+        if(this.id.equals(jugador.id) && this.contrasena.equals(jugador.contrasena)){
             ans=true;
         }
         return ans;
     }
 
     /**
-     * @return the usuario
+     * @return the id
      */
-    public String getUsuario() {
-        return usuario;
+    public String getId() {
+        return id;
     }
 
     /**
-     * @param usuario the usuario to set
+     * @param id the id to set
      */
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
@@ -69,7 +73,10 @@ public class Jugador {
      * @param contrasena the contrasena to set
      */
     public void setContrasena(String contrasena) {
-        this.contrasena = DigestUtils.md5DigestAsHex(contrasena.getBytes()).toUpperCase();
+        System.out.println("en getters");
+        System.out.println(this.contrasena);
+        this.contrasena = contrasena;//DigestUtils.md5DigestAsHex(contrasena.getBytes()).toUpperCase();
+        System.out.println(this.contrasena +" FINAL");
     }
 
     /**
@@ -101,13 +108,17 @@ public class Jugador {
     }
 
     public boolean validarContraseña(String password) {
-        return contrasena.equals(DigestUtils.md5DigestAsHex(password.getBytes()).toUpperCase());
+        System.out.println("validando");
+        System.out.println(this.contrasena);
+        System.out.println(contrasena.equals(DigestUtils.md5DigestAsHex(password.getBytes()).toUpperCase()));
+        return contrasena.equals(password);
     }
 
     @Override
     public String toString() {
-        return "Jugador{" + "usuario=" + usuario + ", contrasena=" + contrasena + ", nombre=" + nombre + ", correo=" + correo + '}';
+        return "Jugador{" + "id=" + id + ", contrasena=" + contrasena + ", nombre=" + nombre + ", correo=" + correo + '}';
     }
+
     
     
 }

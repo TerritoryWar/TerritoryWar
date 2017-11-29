@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 /**
  * @author jhord
  */
-@Service
+
 public interface TerritoryWarPersistence {
     
     /**

@@ -26,12 +26,12 @@ var Module = (function () {
                 // suscripcion para esperar a alguien e iniciar partida
                 stompClient.subscribe('/topic/partidas.' + partidaID, function (eventbody) {
                     var partida = JSON.parse(eventbody.body);
-                    if (partida.jugador1.usuario === usuario.usuario) {
-                        idOponente = partida.jugador2.usuario;
+                    if (partida.jugador1.id === usuario.id) {
+                        idOponente = partida.jugador2.id;
                     } else {
-                        idOponente = partida.jugador1.usuario;
+                        idOponente = partida.jugador1.id;
                     }
-                    console.log("Jugador1 es: " + partida.jugador1.usuario + " y Jugador2 es: " + partida.jugador2.usuario);
+                    console.log("Jugador1 es: " + partida.jugador1.id + " y Jugador2 es: " + partida.jugador2.id);
                     Juego.generarTablero(usuario,idOponente);
                 });
                 // suscripcion para que me publiquen los movimientos de mi oponente
@@ -80,7 +80,7 @@ var Module = (function () {
                 $("#menuUl").replaceWith("<ul id='menuUl'>\n\
                                             <li><a href='index.html'>Home</a></li>\n\
                                             <li><a href='#' onclick='Module.logOut()'><span class='glyphicon glyphicon-log-out'></span> Logout</a></li>\n\
-                                               </ul><div class='nav navbar-nav navbar-right'><label id='labelJugador' >Bienvenido " + usuario.usuario + "</label></div>");
+                                               </ul><div class='nav navbar-nav navbar-right'><label id='labelJugador' >Bienvenido " + usuario.id + "</label></div>");
             }
         },
         logOut: function () {
@@ -105,7 +105,7 @@ var Module = (function () {
                 } else {
                     //no hay partidas disponibles, entonces yo creo mi partida
                     apiclient.createPartida(usuario, function () {
-                        suscribirseParaJugar(usuario.usuario);
+                        suscribirseParaJugar(usuario.id);
                     });
                 }
             });

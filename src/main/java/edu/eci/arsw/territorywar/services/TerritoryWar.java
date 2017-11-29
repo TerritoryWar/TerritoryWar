@@ -11,8 +11,10 @@ import edu.eci.arsw.territorywar.model.Jugador;
 import edu.eci.arsw.territorywar.model.Partida;
 import edu.eci.arsw.territorywar.mom.MessageManagment;
 import edu.eci.arsw.territorywar.persistence.TerritoryWarPersistence;
+import edu.eci.arsw.territorywar.persistence.impl.TerritoryWarPersistenceMongo;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Service;
 
 /**

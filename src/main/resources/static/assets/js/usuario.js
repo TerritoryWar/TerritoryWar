@@ -36,7 +36,8 @@ var ModuloUsuario = (function(){
         validarCredenciales:function (){
             var usr = $("#username").val();
             var pwd = $("#password").val();
-                apiclient.getJugadorValidado(usr,pwd,function (data){
+                
+                apiclient.getJugadorValidado(usr,pwd,function (data){                    
                     localStorage.setItem("usuario", JSON.stringify(data));
                     localStorage.setItem("inicioSesion", JSON.stringify(true));
                     window.location.href = "/index.html";

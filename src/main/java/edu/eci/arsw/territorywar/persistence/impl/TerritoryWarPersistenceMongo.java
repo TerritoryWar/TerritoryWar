@@ -1,7 +1,6 @@
 package edu.eci.arsw.territorywar.persistence.impl;
 
 import edu.eci.arsw.territorywar.model.Jugador;
-import edu.eci.arsw.territorywar.persistence.TerritoryWarPersistence;
 import org.springframework.data.mongodb.repository.MongoRepository;
 //import org.springframework.data.mongodb.repository.MongoRepository;
 
@@ -15,6 +14,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  *
  * @author carlo
  */
-public interface TerritoryWarPersistenceMongo extends TerritoryWarPersistence ,MongoRepository<Jugador, String> {
+//@EnableMongoRepositories
+public interface TerritoryWarPersistenceMongo extends MongoRepository<Jugador, String> {
     
+    public Jugador findById(String id);
 }

@@ -14,6 +14,7 @@ apiclient = (function () {
     
     
     var getPersonasPromise = function () {
+        console.log("en js")
         var r = $.get("territorywars/personas/" + usuario +"/"+contrasena).fail(function (){funFail();});
         return r;
 
@@ -74,7 +75,7 @@ apiclient = (function () {
             getPersonasPromise().then(callback);
         },
         addJugador: function (jugador1,callback){
-            usuario = jugador1.usuario;
+            usuario = jugador1.id;
             contrasena = jugador1.contrasena;
             jugador = jugador1;
             postPersonasPromise().then(getPersonasPromise).then(callback);
@@ -83,13 +84,13 @@ apiclient = (function () {
             getPartidasDisponiblesPromise().then(callback);
         },
         createPartida:function (jugador1,callback){
-            usuario = jugador1.usuario;
+            usuario = jugador1.id;
             contrasena = jugador1.contrasena;
             jugador = jugador1;
             postPartidaPromise().then(callback);
         },
         unirseAPartida:function (jugador1,idPartida1){
-            usuario = jugador1.usuario;
+            usuario = jugador1.id;
             idPartida=idPartida1;
             contrasena = jugador1.contrasena;
             jugador = jugador1;
@@ -97,9 +98,9 @@ apiclient = (function () {
             
         },
         salirDelJuego:function (jugador1){
-            usuario = jugador1.usuario;
+            usuario = jugador1.id;
             jugador=jugador1;
-            idPartida=jugador1.usuario;
+            idPartida=jugador1.id;
             deletePartidaPromise();
         }
     };

@@ -8,9 +8,11 @@ package edu.eci.arsw.territorywarapi;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"edu.eci.arsw.territorywar"})
+@EnableMongoRepositories(basePackages = "edu.eci.arsw.territorywar.persistence.impl")
 /**
  *
  * @author carlo

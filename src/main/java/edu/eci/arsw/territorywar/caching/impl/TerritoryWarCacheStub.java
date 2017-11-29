@@ -49,7 +49,7 @@ public class TerritoryWarCacheStub implements TerritoryWarCache{
      */
     @Override
     public void crearPartida(Jugador jugador) {
-        partidas.put(jugador.getUsuario(), new Partida(jugador.getUsuario(), jugador));
+        partidas.put(jugador.getId(), new Partida(jugador.getId(), jugador));
     }
 
     /**

@@ -55,7 +55,7 @@ public class TerritoryWarTest {
             assertTrue(tw.validarCredenciales("CMS","123457").equals(jugador));
             fail();
         }catch(TerritoryWarException e){
-            assertTrue(!jugador.getUsuario().equals("CMS"));
+            assertTrue(!jugador.getId().equals("CMS"));
         }
     }
 }

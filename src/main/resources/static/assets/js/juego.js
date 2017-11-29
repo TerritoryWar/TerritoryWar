@@ -98,7 +98,7 @@ var Juego = (function () {
     var verificarGanador = function () {
         contarNaves();
         if (navesOponent === 0) {
-            Module.publicarFinJuego(usuario.usuario);
+            Module.publicarFinJuego(usuario.id);
         }
         return navesOponent;
     };
@@ -106,7 +106,7 @@ var Juego = (function () {
     var verificarGanadorTiempo = function () {
         contarNaves();
         if (navesUser > navesOponent) {
-            Module.publicarFinJuego(usuario.usuario);
+            Module.publicarFinJuego(usuario.id);
         }
         else if (navesUser === navesOponent){
             Module.publicarFinJuego("empate");
@@ -171,7 +171,7 @@ var Juego = (function () {
             
                     "<div class='row' style='padding-left: inherit;'>\n\
                         <div>\n\
-                            <h5 style='text-align: center;'> Cantidad de naves tuyas("+usuario.usuario+"): </h5>\n\
+                            <h5 style='text-align: center;'> Cantidad de naves tuyas("+usuario.id+"): </h5>\n\
                             <h3 id='navesUser'> ?? </h3>\n\
                         </div>\n\
                         <div>\n\
@@ -229,13 +229,13 @@ var Juego = (function () {
                     limpiarObjetivos();
                     naveSeleccionada = false;
                     //publicar movimiento 
-                    var movimiento = {"posAnterior": {"x": posAnterior[0], "y": posAnterior[1]}, "posSiguiente": {"x": x, "y": y}, "usuarioMueve": usuario.usuario, "partidaId": null};
+                    var movimiento = {"posAnterior": {"x": posAnterior[0], "y": posAnterior[1]}, "posSiguiente": {"x": x, "y": y}, "usuarioMueve": usuario.id, "partidaId": null};
                     Module.publicarMovimiento(movimiento);
                 }
             }
         },
         nuevoMovimiento: function (movimiento) {
-            if (movimiento.usuarioMueve !== usuario.usuario) {
+            if (movimiento.usuarioMueve !== usuario.id) {
                 movimiento.posAnterior.y = 7 - movimiento.posAnterior.y;
                 movimiento.posSiguiente.y = 7 - movimiento.posSiguiente.y;
                 if (naveSeleccionada && posAnterior[0] == movimiento.posSiguiente.x && posAnterior[1] == movimiento.posSiguiente.y) {
@@ -247,11 +247,11 @@ var Juego = (function () {
             tablero[movimiento.posAnterior.x][movimiento.posAnterior.y].moverNave(movimiento.posSiguiente.x, movimiento.posSiguiente.y);
             tablero[movimiento.posSiguiente.x][movimiento.posSiguiente.y] = tablero[movimiento.posAnterior.x][movimiento.posAnterior.y];
             tablero[movimiento.posAnterior.x][movimiento.posAnterior.y] = null;
-            if (movimiento.usuarioMueve !== usuario.usuario && naveSeleccionada && posiblesMovimientos.length !== tablero[posAnterior[0]][posAnterior[1]].getPosiblesMovimientos(tablero).length) {
+            if (movimiento.usuarioMueve !== usuario.id && naveSeleccionada && posiblesMovimientos.length !== tablero[posAnterior[0]][posAnterior[1]].getPosiblesMovimientos(tablero).length) {
                 posiblesMovimientos = tablero[posAnterior[0]][posAnterior[1]].getPosiblesMovimientos(tablero);
                 if(posiblesMovimientos.length>0)pintarPosiblesMovimientos();
             }
-            if (movimiento.usuarioMueve !== usuario.usuario && naveSeleccionada && isArrayInArray(posiblesMovimientos, [movimiento.posSiguiente.x, movimiento.posSiguiente.y])) {
+            if (movimiento.usuarioMueve !== usuario.id && naveSeleccionada && isArrayInArray(posiblesMovimientos, [movimiento.posSiguiente.x, movimiento.posSiguiente.y])) {
                 tablero[movimiento.posSiguiente.x][movimiento.posSiguiente.y].cambiarImagenAPosibleObjetivo();
             }
             verificarGanador();

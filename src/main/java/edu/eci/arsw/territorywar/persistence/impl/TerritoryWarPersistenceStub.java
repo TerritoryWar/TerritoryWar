@@ -32,11 +32,11 @@ public class TerritoryWarPersistenceStub implements TerritoryWarPersistence{
      */
     @Override
     public  void registrarJugador(Jugador jugador) throws TerritoryWarException{
-        if(jugadores.get(jugador.getUsuario())!=null){
+        if(jugadores.get(jugador.getId())!=null){
             throw new TerritoryWarException(TerritoryWarException.USUARIO_YA_EXISTE);
         }
         else{
-            jugadores.put(jugador.getUsuario(), jugador);
+            jugadores.put(jugador.getId(), jugador);
         }
     }
     
@@ -49,19 +49,19 @@ public class TerritoryWarPersistenceStub implements TerritoryWarPersistence{
      */
     @Override
     public Jugador validarCredenciales(String username, String password) throws TerritoryWarException {
-        Jugador ans;
-        try{
-            if(jugadores.get(username).validarContraseña(password)){
-                ans=jugadores.get(username);
+            Jugador ans;
+            try{
+                if(jugadores.get(username).validarContraseña(password)){
+                    ans=jugadores.get(username);
+                }
+                else{
+                    throw new TerritoryWarException(TerritoryWarException.CREDENCIALES_INCORRECTAS);
+                }
             }
-            else{
-                throw new TerritoryWarException(TerritoryWarException.CREDENCIALES_INCORRECTAS);
+            catch(NullPointerException ex){
+                throw new TerritoryWarException(TerritoryWarException.JUGADOR_NO_EXISTE);
             }
-        }
-        catch(NullPointerException ex){
-            throw new TerritoryWarException(TerritoryWarException.JUGADOR_NO_EXISTE);
-        }
-        return ans;
+            return ans;
     }
     /**
      * @return the jugadores
