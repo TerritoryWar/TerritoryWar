@@ -14,7 +14,6 @@ apiclient = (function () {
     
     
     var getPersonasPromise = function () {
-        console.log("en js")
         var r = $.get("territorywars/personas/" + usuario +"/"+contrasena).fail(function (){funFail();});
         return r;
 

@@ -26,8 +26,6 @@ public class Jugador {
     public Jugador(String id, String contrasena, String nombre, String correo) {
         this.id = id;
         this.contrasena = contrasena;//DigestUtils.md5DigestAsHex(contrasena.getBytes()).toUpperCase();
-        System.out.println("en creador");
-        System.out.println(this.contrasena);
         this.nombre = nombre;
         this.correo = correo;
     }
@@ -73,10 +71,7 @@ public class Jugador {
      * @param contrasena the contrasena to set
      */
     public void setContrasena(String contrasena) {
-        System.out.println("en getters");
-        System.out.println(this.contrasena);
         this.contrasena = contrasena;//DigestUtils.md5DigestAsHex(contrasena.getBytes()).toUpperCase();
-        System.out.println(this.contrasena +" FINAL");
     }
 
     /**
@@ -108,9 +103,6 @@ public class Jugador {
     }
 
     public boolean validarContraseña(String password) {
-        System.out.println("validando");
-        System.out.println(this.contrasena);
-        System.out.println(contrasena.equals(DigestUtils.md5DigestAsHex(password.getBytes()).toUpperCase()));
         return contrasena.equals(password);
     }
 

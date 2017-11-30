@@ -21,17 +21,19 @@ public class TerritoryWarPersistenceMongoIntermediary implements TerritoryWarPer
     
     @Override
     public void registrarJugador(Jugador jugador) throws TerritoryWarException {
-        twpm.save(jugador);
+        System.out.println(jugador.toString());
+        try{
+            twpm.insert(jugador);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
     public Jugador validarCredenciales(String username, String password) throws TerritoryWarException {
         Jugador ans;
         try{
-            System.out.println(twpm.findAll());
-            System.out.println(twpm.findById("Casvad"));
             if(twpm.findById(username).validarContraseña(password)){
-                System.out.println("dsfsf");
                 ans=twpm.findById(username);
             }
             else{
