@@ -35,12 +35,12 @@ var Module = (function () {
                     Juego.generarTablero(usuario,idOponente);
                 });
                 // suscripcion para que me publiquen los movimientos de mi oponente
-                stompClient.subscribe('/topic/movimientos/partidas.' + idPartida, function (eventbody) {
+                stompClient.subscribe('/topic/movimientos.partidas.' + idPartida, function (eventbody) {
                     var movimiento = JSON.parse(eventbody.body);
                     Juego.nuevoMovimiento(movimiento);
                 });
                 // suscripcion para conocer el perdedor 
-                stompClient.subscribe('/topic/ganador/partidas.' + idPartida , function (eventbody) {
+                stompClient.subscribe('/topic/ganador.partidas.' + idPartida , function (eventbody) {
                     if(JSON.parse(eventbody.body).jugadorGanador === "empate"){
                        alert("Juego finalizado por tiempo, hubo un empate");
                     }
@@ -117,10 +117,10 @@ var Module = (function () {
         },
         publicarMovimiento: function (mov) {
             mov.partidaId = idPartida;
-            stompClient.send("/app/movimientos/partidas." + idPartida, {}, JSON.stringify(mov));
+            stompClient.send("/app/movimientos.partidas." + idPartida, {}, JSON.stringify(mov));
         },
         publicarFinJuego: function (ganador) {
-            stompClient.send("/app/ganador/partidas." + idPartida, {}, JSON.stringify({"jugadorGanador": ganador}));
+            stompClient.send("/app/ganador.partidas." + idPartida, {}, JSON.stringify({"jugadorGanador": ganador}));
         }
     };
 })();

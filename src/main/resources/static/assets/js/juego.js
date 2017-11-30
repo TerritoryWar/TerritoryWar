@@ -14,7 +14,7 @@ var Juego = (function () {
     var navesOponent = 16;
     
     var startTime = function(){
-        var segundos = 10;
+        var segundos = 120;
         var s = document.getElementById("timeFinish");
         
         var cronometer = setInterval(function (){
