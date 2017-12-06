@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
  *
  * @author carlo
  */
-@Service
+//@Service
 public class TerritoryWarRedisCache implements TerritoryWarCache{
     @Autowired
     private StringRedisTemplate template;
@@ -31,10 +31,14 @@ public class TerritoryWarRedisCache implements TerritoryWarCache{
     public Set<Partida> getPartidasDisponibles() {
         Set<Partida> ans = new HashSet<>();
         Set<String>  partidas = template.opsForSet().members("partidas");
+        System.out.println(partidas.size()+ " CANTIDAD DE PARTIDAS");
         for (String partida : partidas) {
-            if(template.opsForHash().get("partida:" + partida, "jugador2").equals("null")){
+            System.out.println(partida + " PARTIDA");
+            System.out.println(template.opsForHash().get(partida, "jugador2"));
+            if(template.opsForHash().get(partida, "jugador2")==null){
                 Partida par = new Partida((String) partida,new Jugador((String)template.opsForHash().get("partida:" + partida, "jugador1"), null,null,null));
                 ans.add(par);
+                template.opsForSet().add(("partidas"),par.getPartidaId());
             }
         }
         return ans;
@@ -42,12 +46,14 @@ public class TerritoryWarRedisCache implements TerritoryWarCache{
 
     @Override
     public void crearPartida(Jugador jugador) {
-        template.opsForHash().put("partida:" + jugador.getId(), "jugador1 ",jugador.getId());
+        System.out.println("CREAR PARTIDA");
+        template.opsForHash().put("partida:" + jugador.getId(), "jugador1",jugador.getId());
+        template.opsForSet().add(("partidas"),"partida:"+jugador.getId());
     }
 
     @Override
     public void unirAPartida(String id, Jugador jugador2) throws TerritoryWarException {
-        template.opsForHash().put("partida:" + id, "jugador2 ",jugador2.getId());
+        template.opsForHash().put("partida:" + id, "jugador2",jugador2.getId());
     }
 
     @Override
@@ -66,7 +72,10 @@ public class TerritoryWarRedisCache implements TerritoryWarCache{
 
     @Override
     public void deletePartida(String idPartida) {
-        template.opsForHash().delete("partida:" + idPartida);
+        System.out.println("ELIMINAR PARTIDA");
+        template.opsForHash().delete("partida:" + idPartida, "jugador1");
+        template.opsForHash().delete("partida:" + idPartida, "jugador2");
+        
     }
     
 }
