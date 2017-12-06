@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
  *
  * @author carlo
  */
-@Service
+//@Service
 public class TerritoryWarCacheStub implements TerritoryWarCache{
 
     private static Map<String, Partida> partidas = new ConcurrentHashMap<>();
