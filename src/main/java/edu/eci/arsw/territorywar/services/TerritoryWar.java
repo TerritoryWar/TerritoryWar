@@ -35,6 +35,8 @@ public class TerritoryWar {
      */
     public void unirAPartida(String id, Jugador jugador2) throws TerritoryWarException{
         twc.unirAPartida(id,jugador2);
+        System.out.println(twc.getPartida(id).getJugador1()+" JUGADOR 1");
+        System.out.println(twc.getPartida(id).getJugador2()+" JUGADOR 2");
         mm.reportarAmbosJugadores(twc.getPartida(id));
     }
     
