@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  *
  * @author 2105534
  */
-@Service
+//@Service
 public class TerritoryWarPersistenceMongoIntermediary implements TerritoryWarPersistence{
     @Autowired TerritoryWarPersistenceMongo twpm;
     

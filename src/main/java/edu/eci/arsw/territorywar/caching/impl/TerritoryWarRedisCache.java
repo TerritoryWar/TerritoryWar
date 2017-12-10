@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
  *
  * @author carlo
  */
-@Service
+//@Service
 public class TerritoryWarRedisCache implements TerritoryWarCache{
     @Autowired
     private StringRedisTemplate template;

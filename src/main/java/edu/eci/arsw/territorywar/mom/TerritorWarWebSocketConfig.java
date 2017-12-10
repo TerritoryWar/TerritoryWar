@@ -32,14 +32,15 @@ public class TerritorWarWebSocketConfig extends AbstractWebSocketMessageBrokerCo
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
         // para Heroku
-        //config.enableSimpleBroker("/topic"); 
+        config.enableSimpleBroker("/topic"); 
         // para AWS
-        config.enableStompBrokerRelay("/topic/").setRelayHost(host).setRelayPort(port).
+        /*config.enableStompBrokerRelay("/topic/").setRelayHost(host).setRelayPort(port).
                 setClientLogin(user_host).
                 setClientPasscode(paswd).
                 setSystemLogin(user_host).
                 setSystemPasscode(paswd).
-                setVirtualHost(user_host);
+                setVirtualHost(user_host);*/
+        //
         config.setApplicationDestinationPrefixes("/app");
         
         
