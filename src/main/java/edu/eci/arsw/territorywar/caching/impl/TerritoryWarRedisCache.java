@@ -33,7 +33,7 @@ public class TerritoryWarRedisCache implements TerritoryWarCache{
         Set<String>  partidas = template.opsForSet().members("partidas");
         for (String partida : partidas) {
             if(template.opsForHash().get(partida, "jugador2")==null){
-                Partida par = new Partida((String) partida,new Jugador((String)template.opsForHash().get("partida:" + partida, "jugador1"), null,null,null));
+                Partida par = new Partida((String) partida,new Jugador((String)template.opsForHash().get(partida, "jugador1"), null,null,null));
                 ans.add(par);
             }
         }
@@ -42,8 +42,11 @@ public class TerritoryWarRedisCache implements TerritoryWarCache{
 
     @Override
     public void crearPartida(Jugador jugador) {
-        template.opsForSet().add(("partidas"),"partida:"+jugador.getId());
-        template.opsForHash().put("partida:" + jugador.getId(), "jugador1",jugador.getId());
+        deletePartida(jugador.getId());
+        //template.opsForSet().add(("partidas"),"partida:"+jugador.getId());
+        //template.opsForHash().put("partida:" + jugador.getId(), "jugador1",jugador.getId());
+        template.opsForSet().add(("partidas"),jugador.getId());
+        template.opsForHash().put(jugador.getId(), "jugador1",jugador.getId());
         
     }
 
@@ -69,9 +72,12 @@ public class TerritoryWarRedisCache implements TerritoryWarCache{
 
     @Override
     public void deletePartida(String idPartida) {
-        template.opsForHash().delete("partida:" + idPartida, "jugador1");
-        template.opsForHash().delete("partida:" + idPartida, "jugador2");
-        template.opsForSet().remove("partidas","partida:"+idPartida);
+        //template.opsForHash().delete("partida:" + idPartida, "jugador1");
+        //template.opsForHash().delete("partida:" + idPartida, "jugador2");
+        //template.opsForSet().remove("partidas","partida:"+idPartida);
+        template.opsForHash().delete(idPartida, "jugador1");
+        template.opsForHash().delete(idPartida, "jugador2");
+        template.opsForSet().remove("partidas",idPartida);
     }
     
 }
